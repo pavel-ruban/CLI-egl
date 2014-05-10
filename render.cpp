@@ -1,3 +1,18 @@
+#include "esUtil.h"
+#include "common.hpp"
+#include "context.hpp"
+#include "renderUtils.hpp"
+
+extern bool run, debug;
+
+extern float xAngle, xRadius, yAngle, yRadius, zAngle, zRadius, xCustom, yCustom;
+extern float mAngle, mAngleSin, mAngleCos, tempAngle;
+extern GLint uniform_istext, uniform_color;
+extern GLuint vbo[2];
+
+unsigned int ii = 0;
+extern Context context;
+
 /*
  * Draw a triangle using the shader pair created in Init()
  */

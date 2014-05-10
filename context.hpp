@@ -6,12 +6,19 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-struct freetype {
+typedef struct {
   FT_Library ft;
   FT_Face face;
   FT_GlyphSlot g;
-};
+} Freetype;
 
-struct Context {
-  freetype freetype;
-};
+typedef struct {
+  // Handle to a program object
+  GLuint programObject;
+
+} UserData;
+
+typedef struct {
+  Freetype freetype;
+} Context; 
+

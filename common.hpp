@@ -7,7 +7,4 @@
 #include <fstream>
 #include <vector>
 #include <string>
-
-typedef struct {
-  int a;
-} context;
+#include <math.h>

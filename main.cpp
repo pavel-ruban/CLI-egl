@@ -1,6 +1,10 @@
 #include "common.hpp"
 #include "context.hpp"
+#include "gl.hpp"
+#include "render.hpp"
 #include "input.h"
+
+Context context;
 
 bool run = true, debug = true;
 
@@ -9,7 +13,6 @@ bool run = true, debug = true;
  */
 int graphic_thread() {
   ESContext esContext;
-  Context context;
   UserData userData;
 
   // Init free type.
@@ -22,7 +25,7 @@ int graphic_thread() {
     return 1;
   } 
 
-  context.freetype.g = face->glyph; 
+  context.freetype.g = context.freetype.face->glyph; 
 
   FT_Set_Pixel_Sizes(context.freetype.face, 0, 18);
 

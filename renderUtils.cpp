@@ -1,10 +1,20 @@
+#include "esUtil.h"
+#include "context.hpp"
+
+extern Context context;
+extern GLint uniform_istext, uniform_color;
+extern GLuint vbo[2];
+
 void render_text(const char *text, float x, float y, float sx, float sy) {
   const char *p;
  
   for(p = text; *p; p++) {
-    if(FT_Load_Char(face, *p, FT_LOAD_RENDER))
+    if(FT_Load_Char(context.freetype.face, *p, FT_LOAD_RENDER))
         continue;
  
+    FT_GlyphSlot g;
+    g = context.freetype.g;
+
     glTexImage2D(
       GL_TEXTURE_2D,
       0,

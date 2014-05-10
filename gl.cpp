@@ -14,37 +14,25 @@
 //    a minimal vertex/fragment shader.  The purpose of this 
 //    example is to demonstrate the basic concepts of 
 //    OpenGL ES 2.0 rendering.
+
 #include "esUtil.h"
-#include <fstream>
+#include "context.hpp"
+#include "common.hpp"
 #include <streambuf>
 #include <iostream>
-#include <string>
-#include "input.h"
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
-bool run = true, debug = true;
+extern bool run, debug;
 
-unsigned int ii = 0;
 float mAngle = 0.0;
 float mAngleSin = 0.0;
 float mAngleCos = 0.0;
 float tempAngle = 0.0;
-FT_Library ft;
-FT_Face face;
-FT_GlyphSlot g;
 
 GLint uniform_istext, uniform_color;
 GLuint vbo[2];
 
 float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;
 float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;
-
-typedef struct {
-  // Handle to a program object
-  GLuint programObject;
-
-} UserData;
 
 ///
 // Create a shader object, load the shader source, and
@@ -229,62 +217,4 @@ int Init(ESContext *esContext) {
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
   return GL_TRUE;
-}
-
-void render_text(const char *text, float x, float y, float sx, float sy) {
-  const char *p;
- 
-  for(p = text; *p; p++) {
-    if(FT_Load_Char(face, *p, FT_LOAD_RENDER))
-        continue;
- 
-    glTexImage2D(
-      GL_TEXTURE_2D,
-      0,
-      GL_ALPHA,
-      g->bitmap.width,
-      g->bitmap.rows,
-      0,
-      GL_ALPHA,
-      GL_UNSIGNED_BYTE,
-      g->bitmap.buffer
-    );
- 
-    float x2 = x + g->bitmap_left * sx;
-    float y2 = -y - g->bitmap_top * sy;
-    float w = g->bitmap.width * sx;
-    float h = g->bitmap.rows * sy;
- 
-    GLfloat box[4][4] = {
-        {x2,     -y2    , 0, 0},
-        {x2 + w, -y2    , 1, 0},
-        {x2,     -y2 - h, 0, 1},
-        {x2 + w, -y2 - h, 1, 1},
-    };
- 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof box, box, GL_DYNAMIC_DRAW);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
- 
-    x += (g->advance.x >> 6) * sx;
-    y += (g->advance.y >> 6) * sy;
-  }
-}
-
-void multipleMatrices4x4(float* vVertices, float* mRotate) {
-  // Store unchanged values to temp storage.
-  float t[16];
-  memcpy(t, vVertices, 16 * sizeof(float));
-  int offset = 0, position = 0;
-  int mPosition = 0;
-
-  for (int i = 0; i < 4; i++) {
-    mPosition = position = 0;
-    for (int i = 0; i < 4; i++) {
-      vVertices[offset * 4 + position] = t[offset * 4] * mRotate[mPosition] + t[offset * 4 + 1] * mRotate[mPosition + 4] + t[offset * 4 + 2] * mRotate[mPosition + 8] + t[offset * 4 + 3] * mRotate[mPosition + 12];
-      mPosition++;
-      position++;
-    }
-    offset++;
-  }
 }
