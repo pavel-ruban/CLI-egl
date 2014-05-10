@@ -1,11 +1,14 @@
-EGL = egl.o utils.o input.o
+OBJECTS = main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o
 
-all: $(EGL)
-	g++ -std=c++11 -o egl egl.o utils.o input.o `pkg-config --cflags --libs x11 freetype2` -lGLESv2 -lEGL -lpcre -lboost_system -lboost_thread
+all: $(OBJECTS)
+	g++ -std=c++11 -o egl main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o `pkg-config --cflags --libs x11 freetype2` -lGLESv2 -lEGL -lpcre -lboost_system -lboost_thread
 	#g++ -o egl egl.o utils.o input.o `pkg-config --cflags --libs glesv2 egl x11` -lpcre -lboost_system -lboost_thread
 	#rm egl.o utils.o input.o
 
-egl.o : egl.cpp input.h
+main.o : main.cpp input.h
+	g++ -std=c++11 main.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+
+gl.o : gl.cpp input.h
 	g++ -std=c++11 egl.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
 
 input.o : input.cpp input.h

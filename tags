@@ -8,6 +8,7 @@ Context	context.hpp	/^struct Context {$/;"	s
 Context::freetype	context.hpp	/^  freetype freetype;$/;"	m	struct:Context	access:public
 CreateEGLContext	esUtil.cpp	/^EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,$/;"	kind:f	signature:( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface, EGLint attribList[])
 Draw	render.cpp	/^void Draw(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
+Draw	render.hpp	/^void Draw(ESContext *esContext);$/;"	p	signature:(ESContext *esContext)
 ESCALLBACK	esUtil.h	36;"	kind:d
 ESContext	esUtil.h	/^} ESContext;$/;"	kind:t	typeref:struct:_escontext
 ESMatrix	esUtil.h	/^} ESMatrix;$/;"	kind:t	typeref:struct:__anon3
