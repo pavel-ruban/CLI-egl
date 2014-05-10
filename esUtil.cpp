@@ -31,6 +31,8 @@
 #include  <X11/Xatom.h>
 #include  <X11/Xutil.h>
 
+extern bool run;
+
 // X11 related local variables
 static Display *x_display = NULL;
 
@@ -297,27 +299,26 @@ void ESUTIL_API esMainLoop ( ESContext *esContext )
 
     gettimeofday ( &t1 , &tz );
 
-    while(userInterrupt(esContext) == GL_FALSE)
-    {
-        gettimeofday(&t2, &tz);
-        deltatime = (float)(t2.tv_sec - t1.tv_sec + (t2.tv_usec - t1.tv_usec) * 1e-6);
-        t1 = t2;
+    while(run) {
+      gettimeofday(&t2, &tz);
+      deltatime = (float)(t2.tv_sec - t1.tv_sec + (t2.tv_usec - t1.tv_usec) * 1e-6);
+      t1 = t2;
 
-        if (esContext->updateFunc != NULL)
-            esContext->updateFunc(esContext, deltatime);
-        if (esContext->drawFunc != NULL)
-            esContext->drawFunc(esContext);
+      if (esContext->updateFunc != NULL)
+        esContext->updateFunc(esContext, deltatime);
+      if (esContext->drawFunc != NULL)
+        esContext->drawFunc(esContext);
 
-        eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
+      eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface);
 
-        totaltime += deltatime;
-        frames++;
-        if (totaltime >  2.0f)
-        {
-            printf("%4d frames rendered in %1.4f seconds -> FPS=%3.4f\n", frames, totaltime, frames/totaltime);
-            totaltime -= 2.0f;
-            frames = 0;
-        }
+      totaltime += deltatime;
+      frames++;
+      if (totaltime >  2.0f)
+      {
+        printf("%4d frames rendered in %1.4f seconds -> FPS=%3.4f\n", frames, totaltime, frames/totaltime);
+        totaltime -= 2.0f;
+        frames = 0;
+      }
     }
 }
 
@@ -327,7 +328,7 @@ void ESUTIL_API esMainLoop ( ESContext *esContext )
 //
 void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
 {
-   esContext->drawFunc = drawFunc;
+  esContext->drawFunc = drawFunc;
 }
 
 
@@ -336,7 +337,7 @@ void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *dra
 //
 void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
 {
-   esContext->updateFunc = updateFunc;
+  esContext->updateFunc = updateFunc;
 }
 
 
@@ -344,9 +345,9 @@ void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *u
 //  esRegisterKeyFunc()
 //
 void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
-                                    void (ESCALLBACK *keyFunc) (ESContext*, unsigned char, int, int ) )
+    void (ESCALLBACK *keyFunc) (ESContext*, unsigned char, int, int ) )
 {
-   esContext->keyFunc = keyFunc;
+  esContext->keyFunc = keyFunc;
 }
 
 
@@ -357,15 +358,15 @@ void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,
 //
 void ESUTIL_API esLogMessage ( const char *formatStr, ... )
 {
-    va_list params;
-    char buf[BUFSIZ];
+  va_list params;
+  char buf[BUFSIZ];
 
-    va_start ( params, formatStr );
-    vsprintf ( buf, formatStr, params );
-    
-    printf ( "%s", buf );
-    
-    va_end ( params );
+  va_start ( params, formatStr );
+  vsprintf ( buf, formatStr, params );
+
+  printf ( "%s", buf );
+
+  va_end ( params );
 }
 
 
@@ -379,42 +380,42 @@ void ESUTIL_API esLogMessage ( const char *formatStr, ... )
 
 char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )
 {
-    char *buffer = NULL;
-    FILE *f;
-    unsigned char tgaheader[12];
-    unsigned char attributes[6];
-    unsigned int imagesize;
+  char *buffer = NULL;
+  FILE *f;
+  unsigned char tgaheader[12];
+  unsigned char attributes[6];
+  unsigned int imagesize;
 
-    f = fopen(fileName, "rb");
-    if(f == NULL) return NULL;
+  f = fopen(fileName, "rb");
+  if(f == NULL) return NULL;
 
-    if(fread(&tgaheader, sizeof(tgaheader), 1, f) == 0)
-    {
-        fclose(f);
-        return NULL;
-    }
-
-    if(fread(attributes, sizeof(attributes), 1, f) == 0)
-    {
-        fclose(f);
-        return 0;
-    }
-
-    *width = attributes[1] * 256 + attributes[0];
-    *height = attributes[3] * 256 + attributes[2];
-    imagesize = attributes[4] / 8 * *width * *height;
-    buffer = malloc(imagesize);
-    if (buffer == NULL)
-    {
-        fclose(f);
-        return 0;
-    }
-
-    if(fread(buffer, 1, imagesize, f) != imagesize)
-    {
-        free(buffer);
-        return NULL;
-    }
+  if(fread(&tgaheader, sizeof(tgaheader), 1, f) == 0)
+  {
     fclose(f);
-    return buffer;
+    return NULL;
+  }
+
+  if(fread(attributes, sizeof(attributes), 1, f) == 0)
+  {
+    fclose(f);
+    return 0;
+  }
+
+  *width = attributes[1] * 256 + attributes[0];
+  *height = attributes[3] * 256 + attributes[2];
+  imagesize = attributes[4] / 8 * *width * *height;
+  buffer = (char*) malloc(imagesize);
+  if (buffer == NULL)
+  {
+    fclose(f);
+    return 0;
+  }
+
+  if(fread(buffer, 1, imagesize, f) != imagesize)
+  {
+    free(buffer);
+    return NULL;
+  }
+  fclose(f);
+  return buffer;
 }
