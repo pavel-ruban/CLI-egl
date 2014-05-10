@@ -1,0 +1,31 @@
+syn keyword CTagsStructure _escontext
+syn keyword CTagsMember weight hWnd kbd height mouse updateFunc matrix width keyFunc drawFunc userData parent eglDisplay m eglSurface eglContext
+syn keyword CTagsGlobalVariable zCustom yAngle run wCustom mAngleCos zRadius xCustom mAngleSin uniform_color ft tempAngle yCustom yRadius xAngle mAngle xRadius ii uniform_istext g vbo face zAngle debug
+syn keyword CTagsFunction esPerspective parseInputHandler esRotate esScale graphic_thread Init esRegisterUpdateFunc esMatrixMultiply CreateEGLContext Draw multipleMatrices4x4 esLoadTGA userInterrupt dump_matrix esRegisterKeyFunc esLoadShader main esTranslate event_thread esRegisterDrawFunc handleEvent esLoadProgram esOrtho WinCreate render_text esMainLoop esMatrixLoadIdentity esGenSphere initInput LoadShader esInitContext esFrustum esLogMessage esGenCube esCreateWindow bone
+syn keyword CTagsType ESContext inputFds ESMatrix
+syn keyword CTagsDefinedName ES_WINDOW_STENCIL FALSE ESUTIL_API ES_WINDOW_MULTISAMPLE ESCALLBACK ES_WINDOW_RGB ESUTIL_H ES_WINDOW_ALPHA TRUE ES_WINDOW_DEPTH
+
+" Matches for file egl.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "egl.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember programObject
+	syn keyword CTagsFunction event_thread
+	syn keyword CTagsType UserData
+	syn keyword CTagsDefinedName PI
+	
+endif
+" Matches for file esUtil.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "esUtil.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsGlobalVariable x_display
+	
+endif
+" Matches for file input.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "input.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsDefinedName MOUSE OVECCOUNT KEYBOARD
+	
+endif
+" Matches for file test.cpp:
+if (has_key(b:TagHighlightPrivate, "NormalisedPath") && b:TagHighlightPrivate["NormalisedPath"] == "test.cpp") || TagHighlight#Option#GetOption("IgnoreFileScope")
+	syn keyword CTagsMember parent weight matrix
+	syn keyword CTagsClass bone
+	
+endif

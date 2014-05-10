@@ -1,0 +1,212 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CreateEGLContext	esUtil.cpp	/^EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,$/;"	kind:f	signature:( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface, EGLint attribList[])
+Draw	egl.cpp	/^void Draw(ESContext *esContext) {$/;"	kind:f	signature:(ESContext *esContext)
+ESCALLBACK	esUtil.h	36;"	kind:d
+ESContext	esUtil.h	/^} ESContext;$/;"	kind:t	typeref:struct:_escontext
+ESMatrix	esUtil.h	/^} ESMatrix;$/;"	kind:t	typeref:struct:__anon3
+ESUTIL_API	esUtil.h	35;"	kind:d
+ESUTIL_H	esUtil.h	18;"	kind:d
+ES_WINDOW_ALPHA	esUtil.h	42;"	kind:d
+ES_WINDOW_DEPTH	esUtil.h	44;"	kind:d
+ES_WINDOW_MULTISAMPLE	esUtil.h	48;"	kind:d
+ES_WINDOW_RGB	esUtil.h	40;"	kind:d
+ES_WINDOW_STENCIL	esUtil.h	46;"	kind:d
+FALSE	esUtil.h	56;"	kind:d
+Init	egl.cpp	/^int Init(ESContext *esContext) {$/;"	kind:f	signature:(ESContext *esContext)
+KEYBOARD	input.cpp	3;"	kind:d	file:
+LoadShader	egl.cpp	/^GLuint LoadShader(GLenum type, const char *shaderSrc) {$/;"	kind:f	signature:(GLenum type, const char *shaderSrc)
+MOUSE	input.cpp	4;"	kind:d	file:
+OVECCOUNT	input.cpp	5;"	kind:d	file:
+PI	egl.cpp	327;"	kind:d	file:
+TRUE	esUtil.h	59;"	kind:d
+UserData	egl.cpp	/^} UserData;$/;"	kind:t	typeref:struct:__anon2	file:
+WinCreate	esUtil.cpp	/^EGLBoolean WinCreate(ESContext *esContext, const char *title)$/;"	kind:f	signature:(ESContext *esContext, const char *title)
+__anon1::kbd	input.h	/^  int kbd;$/;"	kind:m	struct:__anon1	access:public
+__anon1::mouse	input.h	/^  int mouse;$/;"	kind:m	struct:__anon1	access:public
+__anon2::programObject	egl.cpp	/^  GLuint programObject;$/;"	kind:m	struct:__anon2	file:	access:public
+__anon3::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
+_escontext	esUtil.h	/^typedef struct _escontext$/;"	kind:s
+_escontext::drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
+_escontext::eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	kind:m	struct:_escontext	access:public
+_escontext::eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	kind:m	struct:_escontext	access:public
+_escontext::eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	kind:m	struct:_escontext	access:public
+_escontext::hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	kind:m	struct:_escontext	access:public
+_escontext::height	esUtil.h	/^   GLint       height;$/;"	kind:m	struct:_escontext	access:public
+_escontext::keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	kind:m	struct:_escontext	access:public
+_escontext::updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
+_escontext::userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
+_escontext::width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
+bone	skeleton.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
+bone	skeleton.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
+bone	skeleton.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
+bone	skeleton.cpp	/^bone::bone(string name) {$/;"	f	class:bone	signature:(string name)
+bone	skeleton.cpp	/^bone::bone(string name, bone* bone, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, int weight)
+bone	skeleton.cpp	/^bone::bone(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight)
+bone	skeleton.cpp	/^bone::bone(vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > matrix, int weight)
+bone	skeleton.hpp	/^    bone();$/;"	p	class:bone	access:public	signature:()
+bone	skeleton.hpp	/^    bone(bone*, int = 0);$/;"	p	class:bone	access:public	signature:(bone*, int = 0)
+bone	skeleton.hpp	/^    bone(bone*, std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(bone*, std::vector < std::vector < GLfloat > >, int = 0)
+bone	skeleton.hpp	/^    bone(int);$/;"	p	class:bone	access:public	signature:(int)
+bone	skeleton.hpp	/^    bone(std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(std::vector < std::vector < GLfloat > >, int = 0)
+bone	skeleton.hpp	/^    bone(string);$/;"	p	class:bone	access:public	signature:(string)
+bone	skeleton.hpp	/^    bone(string, bone*, int = 0);$/;"	p	class:bone	access:public	signature:(string, bone*, int = 0)
+bone	skeleton.hpp	/^    bone(string, bone*, std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(string, bone*, std::vector < std::vector < GLfloat > >, int = 0)
+bone	skeleton.hpp	/^class bone {$/;"	c
+bone	test.cpp	/^    bone();$/;"	p	class:bone	file:	access:public	signature:()
+bone	test.cpp	/^    bone(bone*, int = 0);$/;"	p	class:bone	file:	access:public	signature:(bone*, int = 0)
+bone	test.cpp	/^    bone(bone*, vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(bone*, vector < vector < GLfloat > >, int = 0)
+bone	test.cpp	/^    bone(int);$/;"	p	class:bone	file:	access:public	signature:(int)
+bone	test.cpp	/^    bone(string);$/;"	p	class:bone	file:	access:public	signature:(string)
+bone	test.cpp	/^    bone(string, bone*, int = 0);$/;"	p	class:bone	file:	access:public	signature:(string, bone*, int = 0)
+bone	test.cpp	/^    bone(string, bone*, vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(string, bone*, vector < vector < GLfloat > >, int = 0)
+bone	test.cpp	/^    bone(vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(vector < vector < GLfloat > >, int = 0)
+bone	test.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
+bone	test.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
+bone	test.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
+bone	test.cpp	/^bone::bone(string name) {$/;"	f	class:bone	signature:(string name)
+bone	test.cpp	/^bone::bone(string name, bone* bone, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, int weight)
+bone	test.cpp	/^bone::bone(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight)
+bone	test.cpp	/^bone::bone(vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > matrix, int weight)
+bone	test.cpp	/^class bone {$/;"	c	file:
+bone::bone	skeleton.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
+bone::bone	skeleton.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
+bone::bone	skeleton.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
+bone::bone	skeleton.cpp	/^bone::bone(string name) {$/;"	f	class:bone	signature:(string name)
+bone::bone	skeleton.cpp	/^bone::bone(string name, bone* bone, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, int weight)
+bone::bone	skeleton.cpp	/^bone::bone(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight)
+bone::bone	skeleton.cpp	/^bone::bone(vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > matrix, int weight)
+bone::bone	skeleton.hpp	/^    bone();$/;"	p	class:bone	access:public	signature:()
+bone::bone	skeleton.hpp	/^    bone(bone*, int = 0);$/;"	p	class:bone	access:public	signature:(bone*, int = 0)
+bone::bone	skeleton.hpp	/^    bone(bone*, std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(bone*, std::vector < std::vector < GLfloat > >, int = 0)
+bone::bone	skeleton.hpp	/^    bone(int);$/;"	p	class:bone	access:public	signature:(int)
+bone::bone	skeleton.hpp	/^    bone(std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(std::vector < std::vector < GLfloat > >, int = 0)
+bone::bone	skeleton.hpp	/^    bone(string);$/;"	p	class:bone	access:public	signature:(string)
+bone::bone	skeleton.hpp	/^    bone(string, bone*, int = 0);$/;"	p	class:bone	access:public	signature:(string, bone*, int = 0)
+bone::bone	skeleton.hpp	/^    bone(string, bone*, std::vector < std::vector < GLfloat > >, int = 0);$/;"	p	class:bone	access:public	signature:(string, bone*, std::vector < std::vector < GLfloat > >, int = 0)
+bone::bone	test.cpp	/^    bone();$/;"	p	class:bone	file:	access:public	signature:()
+bone::bone	test.cpp	/^    bone(bone*, int = 0);$/;"	p	class:bone	file:	access:public	signature:(bone*, int = 0)
+bone::bone	test.cpp	/^    bone(bone*, vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(bone*, vector < vector < GLfloat > >, int = 0)
+bone::bone	test.cpp	/^    bone(int);$/;"	p	class:bone	file:	access:public	signature:(int)
+bone::bone	test.cpp	/^    bone(string);$/;"	p	class:bone	file:	access:public	signature:(string)
+bone::bone	test.cpp	/^    bone(string, bone*, int = 0);$/;"	p	class:bone	file:	access:public	signature:(string, bone*, int = 0)
+bone::bone	test.cpp	/^    bone(string, bone*, vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(string, bone*, vector < vector < GLfloat > >, int = 0)
+bone::bone	test.cpp	/^    bone(vector < vector < GLfloat > >, int = 0);$/;"	p	class:bone	file:	access:public	signature:(vector < vector < GLfloat > >, int = 0)
+bone::bone	test.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
+bone::bone	test.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
+bone::bone	test.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
+bone::bone	test.cpp	/^bone::bone(string name) {$/;"	f	class:bone	signature:(string name)
+bone::bone	test.cpp	/^bone::bone(string name, bone* bone, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, int weight)
+bone::bone	test.cpp	/^bone::bone(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(string name, bone* bone, vector < vector < GLfloat > > matrix, int weight)
+bone::bone	test.cpp	/^bone::bone(vector < vector < GLfloat > > matrix, int weight) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > matrix, int weight)
+bone::matrix	skeleton.hpp	/^    std::vector< std::vector< GLfloat > > matrix;$/;"	m	class:bone	access:public
+bone::matrix	test.cpp	/^    vector< vector< GLfloat > > matrix;$/;"	m	class:bone	file:	access:public
+bone::multipleMatrix	skeleton.cpp	/^void bone::multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > mMatrix)
+bone::multipleMatrix	skeleton.hpp	/^    void multipleMatrix (std::vector < std::vector < GLfloat > > mMatrix);$/;"	p	class:bone	access:public	signature:(std::vector < std::vector < GLfloat > > mMatrix)
+bone::multipleMatrix	test.cpp	/^    void multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	access:public	signature:(vector < vector < GLfloat > > mMatrix)
+bone::name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
+bone::name	test.cpp	/^    string name;$/;"	m	class:bone	file:	access:public
+bone::parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
+bone::parent	test.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
+bone::weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
+bone::weight	test.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public
+debug	egl.cpp	/^bool run = true, debug = true;$/;"	kind:v
+drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
+dump_bone	skeleton.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
+dump_bone	test.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
+dump_matrix	skeleton.cpp	/^void dump_matrix(vector< vector< GLfloat > >* matrix, int tab = 0) {$/;"	f	signature:(vector< vector< GLfloat > >* matrix, int tab = 0)
+dump_matrix	test.cpp	/^void dump_matrix(vector< vector< GLfloat > >* matrix, int tab = 0) {$/;"	f	signature:(vector< vector< GLfloat > >* matrix, int tab = 0)
+eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	kind:m	struct:_escontext	access:public
+eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	kind:m	struct:_escontext	access:public
+eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	kind:m	struct:_escontext	access:public
+esCreateWindow	esUtil.cpp	/^GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, GLint width, GLint height, GLuint flags )$/;"	kind:f	signature:( ESContext *esContext, const char* title, GLint width, GLint height, GLuint flags )
+esCreateWindow	esUtil.h	/^GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags );$/;"	kind:p	signature:( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags )
+esFrustum	esUtil.h	/^void ESUTIL_API esFrustum(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
+esGenCube	esUtil.h	/^int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals, $/;"	kind:p	signature:( float scale, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
+esGenSphere	esUtil.h	/^int ESUTIL_API esGenSphere ( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, $/;"	kind:p	signature:( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
+esInitContext	esUtil.cpp	/^void ESUTIL_API esInitContext ( ESContext *esContext )$/;"	kind:f	signature:( ESContext *esContext )
+esInitContext	esUtil.h	/^void ESUTIL_API esInitContext ( ESContext *esContext );$/;"	kind:p	signature:( ESContext *esContext )
+esLoadProgram	esUtil.h	/^GLuint ESUTIL_API esLoadProgram ( const char *vertShaderSrc, const char *fragShaderSrc );$/;"	kind:p	signature:( const char *vertShaderSrc, const char *fragShaderSrc )
+esLoadShader	esUtil.h	/^GLuint ESUTIL_API esLoadShader ( GLenum type, const char *shaderSrc );$/;"	kind:p	signature:( GLenum type, const char *shaderSrc )
+esLoadTGA	esUtil.cpp	/^char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )$/;"	kind:f	signature:( char *fileName, int *width, int *height )
+esLoadTGA	esUtil.h	/^char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height );$/;"	kind:p	signature:( char *fileName, int *width, int *height )
+esLogMessage	esUtil.cpp	/^void ESUTIL_API esLogMessage ( const char *formatStr, ... )$/;"	kind:f	signature:( const char *formatStr, ... )
+esLogMessage	esUtil.h	/^void ESUTIL_API esLogMessage ( const char *formatStr, ... );$/;"	kind:p	signature:( const char *formatStr, ... )
+esMainLoop	esUtil.cpp	/^void ESUTIL_API esMainLoop ( ESContext *esContext )$/;"	kind:f	signature:( ESContext *esContext )
+esMainLoop	esUtil.h	/^void ESUTIL_API esMainLoop ( ESContext *esContext );$/;"	kind:p	signature:( ESContext *esContext )
+esMatrixLoadIdentity	esUtil.h	/^void ESUTIL_API esMatrixLoadIdentity(ESMatrix *result);$/;"	kind:p	signature:(ESMatrix *result)
+esMatrixMultiply	esUtil.h	/^void ESUTIL_API esMatrixMultiply(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB);$/;"	kind:p	signature:(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB)
+esOrtho	esUtil.h	/^void ESUTIL_API esOrtho(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
+esPerspective	esUtil.h	/^void ESUTIL_API esPerspective(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ)
+esRegisterDrawFunc	esUtil.cpp	/^void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )$/;"	kind:f	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
+esRegisterDrawFunc	esUtil.h	/^void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) );$/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) )
+esRegisterKeyFunc	esUtil.cpp	/^void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,$/;"	kind:f	signature:( ESContext *esContext, void (ESCALLBACK *keyFunc) (ESContext*, unsigned char, int, int ) )
+esRegisterKeyFunc	esUtil.h	/^void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext, $/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext*, unsigned char, int, int ) )
+esRegisterUpdateFunc	esUtil.cpp	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )$/;"	kind:f	signature:( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
+esRegisterUpdateFunc	esUtil.h	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) );$/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
+esRotate	esUtil.h	/^void ESUTIL_API esRotate(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);$/;"	kind:p	signature:(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
+esScale	esUtil.h	/^void ESUTIL_API esScale(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz)
+esTranslate	esUtil.h	/^void ESUTIL_API esTranslate(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz)
+event_thread	egl.cpp	/^extern void event_thread();$/;"	kind:p	file:	signature:()
+event_thread	input.cpp	/^void event_thread() {$/;"	kind:f	signature:()
+face	egl.cpp	/^FT_Face face;$/;"	kind:v
+ft	egl.cpp	/^FT_Library ft;$/;"	kind:v
+g	egl.cpp	/^FT_GlyphSlot g;$/;"	kind:v
+graphic_thread	egl.cpp	/^int graphic_thread() {$/;"	kind:f	signature:()
+hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	kind:m	struct:_escontext	access:public
+handleEvent	input.cpp	/^void handleEvent(int fd) {$/;"	kind:f	signature:(int fd)
+handleEvent	input.h	/^void handleEvent(int);$/;"	kind:p	signature:(int)
+height	esUtil.h	/^   GLint       height;$/;"	kind:m	struct:_escontext	access:public
+ii	egl.cpp	/^unsigned int ii = 0;$/;"	kind:v
+initInput	input.cpp	/^inputFds initInput() {$/;"	kind:f	signature:()
+initInput	input.h	/^inputFds initInput();$/;"	kind:p	signature:()
+inputFds	input.h	/^} inputFds;$/;"	kind:t	typeref:struct:__anon1
+kbd	input.h	/^  int kbd;$/;"	kind:m	struct:__anon1	access:public
+keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	kind:m	struct:_escontext	access:public
+m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
+mAngle	egl.cpp	/^float mAngle = 0.0;$/;"	kind:v
+mAngleCos	egl.cpp	/^float mAngleCos = 0.0;$/;"	kind:v
+mAngleSin	egl.cpp	/^float mAngleSin = 0.0;$/;"	kind:v
+main	egl.cpp	/^int main(int argc, char *argv[]) {$/;"	kind:f	signature:(int argc, char *argv[])
+main	test.cpp	/^int main(int argc, char* argv[]) {$/;"	f	signature:(int argc, char* argv[])
+matrix	skeleton.hpp	/^    std::vector< std::vector< GLfloat > > matrix;$/;"	m	class:bone	access:public
+matrix	test.cpp	/^    vector< vector< GLfloat > > matrix;$/;"	m	class:bone	file:	access:public
+mouse	input.h	/^  int mouse;$/;"	kind:m	struct:__anon1	access:public
+multipleMatrices4x4	egl.cpp	/^void multipleMatrices4x4(float* vVertices, float* mRotate) {$/;"	kind:f	signature:(float* vVertices, float* mRotate)
+multipleMatrix	skeleton.cpp	/^void bone::multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > mMatrix)
+multipleMatrix	skeleton.hpp	/^    void multipleMatrix (std::vector < std::vector < GLfloat > > mMatrix);$/;"	p	class:bone	access:public	signature:(std::vector < std::vector < GLfloat > > mMatrix)
+multipleMatrix	test.cpp	/^    void multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	access:public	signature:(vector < vector < GLfloat > > mMatrix)
+name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
+name	test.cpp	/^    string name;$/;"	m	class:bone	file:	access:public
+parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
+parent	test.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
+parseInputHandler	input.cpp	/^char* parseInputHandler(int type, char* subject) {$/;"	kind:f	signature:(int type, char* subject)
+parseInputHandler	input.h	/^char* parseInputHandler(int, char*);$/;"	kind:p	signature:(int, char*)
+programObject	egl.cpp	/^  GLuint programObject;$/;"	kind:m	struct:__anon2	file:	access:public
+render_text	egl.cpp	/^void render_text(const char *text, float x, float y, float sx, float sy) {$/;"	kind:f	signature:(const char *text, float x, float y, float sx, float sy)
+run	egl.cpp	/^bool run = true, debug = true;$/;"	kind:v
+tempAngle	egl.cpp	/^float tempAngle = 0.0;$/;"	kind:v
+uniform_color	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	kind:v
+uniform_istext	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	kind:v
+updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
+userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
+userInterrupt	esUtil.cpp	/^GLboolean userInterrupt(ESContext *esContext)$/;"	kind:f	signature:(ESContext *esContext)
+vbo	egl.cpp	/^GLuint vbo[2];$/;"	kind:v
+wCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	kind:v
+weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
+weight	test.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public
+width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
+xAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v
+xCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	kind:v
+xRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v
+x_display	esUtil.cpp	/^static Display *x_display = NULL;$/;"	kind:v	file:
+yAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v
+yCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	kind:v
+yRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v
+zAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v
+zCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	kind:v
+zRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	kind:v

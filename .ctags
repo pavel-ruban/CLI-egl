@@ -1,0 +1,5 @@
+--langmap=c++:.cpp.hpp.c.h
+--c++-kinds=+p
+--languages=c++
+--extra=+q
+--fields=+iaS
