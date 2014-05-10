@@ -75,46 +75,6 @@ char* parseInputHandler(int type, char* subject) {
   return 0;
 }
 
-void event_thread() {
-  int retval, max_fd;
-  fd_set input;
-  inputFds inputFds = initInput(); 
-
-  if (inputFds.mouse < 3 || inputFds.kbd < 3) {
-    printf("error: there are no any active input drivers");
-    exit(1);
-  }
-
-  max_fd = (inputFds.mouse > inputFds.kbd ? inputFds.mouse : inputFds.kbd) + 1;
-
-  printf("mouse fd = %i\nkeyboard fd = %i", inputFds.mouse, inputFds.kbd);
-
-  while (run) {
-    /* Initialize the input set */
-    FD_ZERO(&input);
-    FD_SET(inputFds.mouse, &input);
-    FD_SET(inputFds.kbd, &input);
-
-    /* Do the select */
-    retval = select(max_fd, &input, NULL, NULL, NULL);
-
-    /* See if there was an error */
-    if (retval < 0)
-      perror("select failed");
-    else if (retval == 0)
-      puts("TIMEOUT");
-    else {
-      /* We have input */
-      if (FD_ISSET(inputFds.mouse, &input)) {
-        handleEvent(inputFds.mouse);
-      }
-      else if (FD_ISSET(inputFds.kbd, &input)) {
-        handleEvent(inputFds.kbd);
-      }
-    }
-  }
-}
-
 /**
  * Get dynamic keyboard & mouse paths if available.
  * Open driver paths & returns they file descriptors.

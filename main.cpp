@@ -1,39 +1,30 @@
-#include "esUtil.h"
-#include <fstream>
-#include <streambuf>
-#include <iostream>
-#include <string>
+#include "common.hpp"
+#include "context.hpp"
 #include "input.h"
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 bool run = true, debug = true;
-
-FT_Library ft;
-FT_Face face;
-FT_GlyphSlot g;
 
 /**
  * Init graphic & start render process.
  */
 int graphic_thread() {
   ESContext esContext;
-  UserData  userData;
+  Context context;
+  UserData userData;
 
   // Init free type.
-
-  if(FT_Init_FreeType(&ft)) {
+  if(FT_Init_FreeType(&context.freetype.ft)) {
     fprintf(stderr, "Could not init freetype library\n");
     return 1;
   }
-  if(FT_New_Face(ft, "UbuntuMono-R.ttf", 0, &face)) {
+  if(FT_New_Face(context.freetype.ft, "UbuntuMono-R.ttf", 0, &context.freetype.face)) {
     fprintf(stderr, "Could not open font\n");
     return 1;
   } 
 
-  g = face->glyph; 
+  context.freetype.g = face->glyph; 
 
-  FT_Set_Pixel_Sizes(face, 0, 18);
+  FT_Set_Pixel_Sizes(context.freetype.face, 0, 18);
 
   esInitContext(&esContext);
   esContext.userData = &userData;

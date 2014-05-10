@@ -4,8 +4,10 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+Context	context.hpp	/^struct Context {$/;"	s
+Context::freetype	context.hpp	/^  freetype freetype;$/;"	m	struct:Context	access:public
 CreateEGLContext	esUtil.cpp	/^EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,$/;"	kind:f	signature:( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface, EGLint attribList[])
-Draw	egl.cpp	/^void Draw(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
+Draw	render.cpp	/^void Draw(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
 ESCALLBACK	esUtil.h	36;"	kind:d
 ESContext	esUtil.h	/^} ESContext;$/;"	kind:t	typeref:struct:_escontext
 ESMatrix	esUtil.h	/^} ESMatrix;$/;"	kind:t	typeref:struct:__anon3
@@ -18,17 +20,22 @@ ES_WINDOW_RGB	esUtil.h	40;"	kind:d
 ES_WINDOW_STENCIL	esUtil.h	46;"	kind:d
 FALSE	esUtil.h	56;"	kind:d
 Init	egl.cpp	/^int Init(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
-KEYBOARD	input.cpp	3;"	kind:d	file:
+Init	gl.cpp	/^int Init(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
+KEYBOARD	input.cpp	3;"	d	file:
 LoadShader	egl.cpp	/^GLuint LoadShader(GLenum type, const char *shaderSrc) {$/;"	f	signature:(GLenum type, const char *shaderSrc)
-MOUSE	input.cpp	4;"	kind:d	file:
-OVECCOUNT	input.cpp	5;"	kind:d	file:
-PI	egl.cpp	327;"	d	file:
+LoadShader	gl.cpp	/^GLuint LoadShader(GLenum type, const char *shaderSrc) {$/;"	f	signature:(GLenum type, const char *shaderSrc)
+MOUSE	input.cpp	4;"	d	file:
+OVECCOUNT	input.cpp	5;"	d	file:
+PI	render.cpp	36;"	d	file:
 TRUE	esUtil.h	59;"	kind:d
 UserData	egl.cpp	/^} UserData;$/;"	t	typeref:struct:__anon1	file:
+UserData	gl.cpp	/^} UserData;$/;"	t	typeref:struct:__anon1	file:
 WinCreate	esUtil.cpp	/^EGLBoolean WinCreate(ESContext *esContext, const char *title)$/;"	kind:f	signature:(ESContext *esContext, const char *title)
+__anon1::a	common.hpp	/^  int a;$/;"	m	struct:__anon1	access:public
 __anon1::kbd	input.h	/^  int kbd;$/;"	kind:m	struct:__anon1	access:public
 __anon1::mouse	input.h	/^  int mouse;$/;"	kind:m	struct:__anon1	access:public
 __anon1::programObject	egl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
+__anon1::programObject	gl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
 __anon3::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
 _escontext	esUtil.h	/^typedef struct _escontext$/;"	kind:s
 _escontext::drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
@@ -41,6 +48,7 @@ _escontext::keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext
 _escontext::updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
 _escontext::userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
 _escontext::width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
+a	common.hpp	/^  int a;$/;"	m	struct:__anon1	access:public
 bone	skeleton.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
 bone	skeleton.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
 bone	skeleton.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
@@ -114,7 +122,9 @@ bone::parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 bone::parent	test.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
 bone::weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
 bone::weight	test.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public
+context	common.hpp	/^} context;$/;"	t	typeref:struct:__anon1
 debug	egl.cpp	/^bool run = true, debug = true;$/;"	v
+debug	gl.cpp	/^bool run = true, debug = true;$/;"	v
 debug	main.cpp	/^bool run = true, debug = true;$/;"	v
 drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
 dump_bone	skeleton.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
@@ -152,38 +162,49 @@ esRegisterUpdateFunc	esUtil.h	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext
 esRotate	esUtil.h	/^void ESUTIL_API esRotate(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);$/;"	kind:p	signature:(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 esScale	esUtil.h	/^void ESUTIL_API esScale(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz)
 esTranslate	esUtil.h	/^void ESUTIL_API esTranslate(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz)
-event_thread	egl.cpp	/^extern void event_thread();$/;"	p	file:	signature:()
-event_thread	input.cpp	/^void event_thread() {$/;"	kind:f	signature:()
 event_thread	main.cpp	/^void event_thread() {$/;"	f	signature:()
+face	context.hpp	/^  FT_Face face;$/;"	m	struct:freetype	access:public
 face	egl.cpp	/^FT_Face face;$/;"	v
-face	main.cpp	/^FT_Face face;$/;"	v
+face	gl.cpp	/^FT_Face face;$/;"	v
+freetype	context.hpp	/^  freetype freetype;$/;"	m	struct:Context	access:public
+freetype	context.hpp	/^struct freetype {$/;"	s
+freetype::face	context.hpp	/^  FT_Face face;$/;"	m	struct:freetype	access:public
+freetype::ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:freetype	access:public
+freetype::g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:freetype	access:public
+ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:freetype	access:public
 ft	egl.cpp	/^FT_Library ft;$/;"	v
-ft	main.cpp	/^FT_Library ft;$/;"	v
+ft	gl.cpp	/^FT_Library ft;$/;"	v
+g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:freetype	access:public
 g	egl.cpp	/^FT_GlyphSlot g;$/;"	v
-g	main.cpp	/^FT_GlyphSlot g;$/;"	v
-graphic_thread	egl.cpp	/^int graphic_thread() {$/;"	f	signature:()
+g	gl.cpp	/^FT_GlyphSlot g;$/;"	v
 graphic_thread	main.cpp	/^int graphic_thread() {$/;"	f	signature:()
 hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	kind:m	struct:_escontext	access:public
-handleEvent	input.cpp	/^void handleEvent(int fd) {$/;"	kind:f	signature:(int fd)
+handleEvent	input.cpp	/^void handleEvent(int fd) {$/;"	f	signature:(int fd)
 handleEvent	input.h	/^void handleEvent(int);$/;"	kind:p	signature:(int)
 height	esUtil.h	/^   GLint       height;$/;"	kind:m	struct:_escontext	access:public
 ii	egl.cpp	/^unsigned int ii = 0;$/;"	v
-initInput	input.cpp	/^inputFds initInput() {$/;"	kind:f	signature:()
+ii	gl.cpp	/^unsigned int ii = 0;$/;"	v
+initInput	input.cpp	/^inputFds initInput() {$/;"	f	signature:()
 initInput	input.h	/^inputFds initInput();$/;"	kind:p	signature:()
 inputFds	input.h	/^} inputFds;$/;"	kind:t	typeref:struct:__anon1
 kbd	input.h	/^  int kbd;$/;"	kind:m	struct:__anon1	access:public
 keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	kind:m	struct:_escontext	access:public
 m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
 mAngle	egl.cpp	/^float mAngle = 0.0;$/;"	v
+mAngle	gl.cpp	/^float mAngle = 0.0;$/;"	v
 mAngleCos	egl.cpp	/^float mAngleCos = 0.0;$/;"	v
+mAngleCos	gl.cpp	/^float mAngleCos = 0.0;$/;"	v
 mAngleSin	egl.cpp	/^float mAngleSin = 0.0;$/;"	v
-main	egl.cpp	/^int main(int argc, char *argv[]) {$/;"	f	signature:(int argc, char *argv[])
+mAngleSin	gl.cpp	/^float mAngleSin = 0.0;$/;"	v
 main	main.cpp	/^int main(int argc, char *argv[]) {$/;"	f	signature:(int argc, char *argv[])
 main	test.cpp	/^int main(int argc, char* argv[]) {$/;"	f	signature:(int argc, char* argv[])
 matrix	skeleton.hpp	/^    std::vector< std::vector< GLfloat > > matrix;$/;"	m	class:bone	access:public
 matrix	test.cpp	/^    vector< vector< GLfloat > > matrix;$/;"	m	class:bone	file:	access:public
 mouse	input.h	/^  int mouse;$/;"	kind:m	struct:__anon1	access:public
 multipleMatrices4x4	egl.cpp	/^void multipleMatrices4x4(float* vVertices, float* mRotate) {$/;"	f	signature:(float* vVertices, float* mRotate)
+multipleMatrices4x4	gl.cpp	/^void multipleMatrices4x4(float* vVertices, float* mRotate) {$/;"	f	signature:(float* vVertices, float* mRotate)
+multipleMatrices4x4	renderUtils.cpp	/^void multipleMatrices4x4(float* vVertices, float* mRotate) {$/;"	f	signature:(float* vVertices, float* mRotate)
+multipleMatrices4x4	renderUtils.hpp	/^void multipleMatrices4x4(float*, float*);$/;"	p	signature:(float*, float*)
 multipleMatrix	skeleton.cpp	/^void bone::multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > mMatrix)
 multipleMatrix	skeleton.hpp	/^    void multipleMatrix (std::vector < std::vector < GLfloat > > mMatrix);$/;"	p	class:bone	access:public	signature:(std::vector < std::vector < GLfloat > > mMatrix)
 multipleMatrix	test.cpp	/^    void multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	access:public	signature:(vector < vector < GLfloat > > mMatrix)
@@ -191,30 +212,49 @@ name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
 name	test.cpp	/^    string name;$/;"	m	class:bone	file:	access:public
 parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 parent	test.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
-parseInputHandler	input.cpp	/^char* parseInputHandler(int type, char* subject) {$/;"	kind:f	signature:(int type, char* subject)
+parseInputHandler	input.cpp	/^char* parseInputHandler(int type, char* subject) {$/;"	f	signature:(int type, char* subject)
 parseInputHandler	input.h	/^char* parseInputHandler(int, char*);$/;"	kind:p	signature:(int, char*)
 programObject	egl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
+programObject	gl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
 render_text	egl.cpp	/^void render_text(const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(const char *text, float x, float y, float sx, float sy)
+render_text	gl.cpp	/^void render_text(const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(const char *text, float x, float y, float sx, float sy)
+render_text	renderUtils.cpp	/^void render_text(const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(const char *text, float x, float y, float sx, float sy)
+render_text	renderUtils.hpp	/^void render_text(const char*, float, float, float, float);$/;"	p	signature:(const char*, float, float, float, float)
 run	egl.cpp	/^bool run = true, debug = true;$/;"	v
+run	gl.cpp	/^bool run = true, debug = true;$/;"	v
 run	main.cpp	/^bool run = true, debug = true;$/;"	v
 tempAngle	egl.cpp	/^float tempAngle = 0.0;$/;"	v
+tempAngle	gl.cpp	/^float tempAngle = 0.0;$/;"	v
 uniform_color	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
+uniform_color	gl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
 uniform_istext	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
+uniform_istext	gl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
 updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
 userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
 userInterrupt	esUtil.cpp	/^GLboolean userInterrupt(ESContext *esContext)$/;"	kind:f	signature:(ESContext *esContext)
 vbo	egl.cpp	/^GLuint vbo[2];$/;"	v
+vbo	gl.cpp	/^GLuint vbo[2];$/;"	v
 wCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
+wCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
 weight	test.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public
 width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
 xAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+xAngle	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 xCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
+xCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 xRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+xRadius	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 x_display	esUtil.cpp	/^static Display *x_display = NULL;$/;"	kind:v	file:
 yAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+yAngle	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 yCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
+yCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 yRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+yRadius	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 zAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+zAngle	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 zCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
+zCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 zRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+zRadius	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
