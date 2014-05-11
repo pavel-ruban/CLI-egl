@@ -21,15 +21,10 @@
 #include <streambuf>
 #include <iostream>
 
-extern bool run, debug;
-
 float mAngle = 0.0;
 float mAngleSin = 0.0;
 float mAngleCos = 0.0;
 float tempAngle = 0.0;
-
-GLint uniform_istext, uniform_color;
-GLuint vbo[2];
 
 float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;
 float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;
@@ -83,7 +78,7 @@ GLuint LoadShader(GLenum type, const char *shaderSrc) {
 // Initialize the shader and program object
 //
 int Init(ESContext *esContext) {
-  UserData *userData = (UserData*) esContext->userData;
+  UserData *userData = &esContext->userData;
   
   // Init free type.
   if(FT_Init_FreeType(&userData->freetype.ft)) {
@@ -198,7 +193,7 @@ int Init(ESContext *esContext) {
         break;
 
       case GL_INT:
-        uniform_istext = location;
+        userData->uniforms.uniform_istext = location;
         break;
       
     }
@@ -207,7 +202,7 @@ int Init(ESContext *esContext) {
   GLint location;
   
   if ((location = glGetUniformLocation(programObject, "color")) != -1)
-    uniform_color = location;
+    userData->uniforms.uniform_color = location;
     
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -217,13 +212,13 @@ int Init(ESContext *esContext) {
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   
-  glGenBuffers(2, vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+  glGenBuffers(2, userData->vbo);
+  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 4 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-  glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 2 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);

@@ -22,7 +22,6 @@ int graphic_thread(ESContext* esContext) {
  * Handle input handlers.
  */
 void event_thread(ESContext* esContext) {
-  UserData* data = (UserData*) esContext->userData;
   int retval, max_fd;
   fd_set input;
   inputFds inputFds = initInput(); 
@@ -36,7 +35,7 @@ void event_thread(ESContext* esContext) {
 
   printf("mouse fd = %i\nkeyboard fd = %i", inputFds.mouse, inputFds.kbd);
 
-  while (data->run) {
+  while (esContext->userData.run) {
     /* Initialize the input set */
     FD_ZERO(&input);
     FD_SET(inputFds.mouse, &input);
@@ -66,14 +65,13 @@ void event_thread(ESContext* esContext) {
  * Programm start.
  */
 int main(int argc, char *argv[]) {
-  ESContext* esContext = (ESContext*) malloc(sizeof(ESContext));
+  ESContext* esContext;
+  esContext = (ESContext*) malloc(sizeof(ESContext));
 
   esInitContext(esContext);
-  UserData* userData = (UserData*) malloc(sizeof(UserData));
-  esContext->userData = userData;
-  memset(userData, 0, sizeof(UserData));
-  userData->run = true;
-  userData->debug = true;
+
+  esContext->userData.run = true;
+  esContext->userData.debug = true;
 
   // Split program into two separate threads.
   boost::thread graphicThread(boost::bind(graphic_thread, boost::ref(esContext)));

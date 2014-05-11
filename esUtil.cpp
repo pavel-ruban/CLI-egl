@@ -289,7 +289,7 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
 
 void ESUTIL_API esMainLoop ( ESContext *esContext )
 {
-    UserData* userData = (UserData*) esContext->userData;
+    UserData* userData = &esContext->userData;
 
     struct timeval t1, t2;
     struct timezone tz;

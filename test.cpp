@@ -5,27 +5,48 @@
 #include <EGL/egl.h>
 #include <vector>
 #include <array>
+#include <boost/thread.hpp>
 
 using namespace std;
 
+
 typedef struct {
-  int a[5];
+  int run;
+} bbb;
+
+typedef struct {
+  bbb* bb;
 } abc;
 
-void m(abc* x) {
-  int *b = (*x).a;
-  
-  //b = (*x).a;
+abc* z;
 
-  printf("array: %i", b[2]);
+void m(abc*);
+void m2(abc*);
+
+void t1() {
+  while (1) {
+    printf("thread1: %i\n", z->bb->run);
+  }
+}
+
+void t2() {
+    m2(z);
+  while (1) {
+    printf("thread2: %i\n", z->bb->run);
+  }
 }
 
 int main(int argc, char* argv[]) {
   using namespace std;
+  z = (abc*) malloc(sizeof(abc));
+  z->bb = (bbb*) malloc(sizeof(bbb));
+  z->bb->run = 1;
 
-    
-  m(&x);
-  // printf("\n%i ", second.weight);
+  boost::thread graphicThread(t1);
+  boost::thread eventThread(t2);
+
+  graphicThread.join();
+  eventThread.join();
 
   return 0;
 }

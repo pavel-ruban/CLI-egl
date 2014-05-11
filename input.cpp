@@ -176,7 +176,7 @@ inputFds initInput() {
  * Process incoming events.
  */
 void handleEvent(int fd, ESContext* esContext) {
-  UserData* userData = (UserData*) esContext->userData; 
+  UserData* userData = &esContext->userData; 
 
   struct input_event ev;
   size_t bytes;

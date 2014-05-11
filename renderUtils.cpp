@@ -1,11 +1,9 @@
 #include "esUtil.h"
 #include "context.hpp"
 
-extern GLint uniform_istext, uniform_color;
-
 void render_text(ESContext* esContext, const char *text, float x, float y, float sx, float sy) {
 
-  UserData *userData = (UserData*) esContext->userData;
+  UserData *userData = &esContext->userData;
   const char *p;
  
   for(p = text; *p; p++) {

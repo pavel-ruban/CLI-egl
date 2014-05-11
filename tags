@@ -7,18 +7,18 @@
 CreateEGLContext	esUtil.cpp	/^EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,$/;"	f	signature:( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface, EGLint attribList[])
 Draw	render.cpp	/^void Draw(ESContext* esContext) {$/;"	f	signature:(ESContext* esContext)
 Draw	render.hpp	/^void Draw(ESContext *esContext);$/;"	p	signature:(ESContext *esContext)
-ESCALLBACK	esUtil.h	36;"	kind:d
-ESContext	esUtil.h	/^} ESContext;$/;"	kind:t	typeref:struct:_escontext
-ESMatrix	esUtil.h	/^} ESMatrix;$/;"	kind:t	typeref:struct:__anon3
-ESUTIL_API	esUtil.h	35;"	kind:d
-ESUTIL_H	esUtil.h	18;"	kind:d
-ES_WINDOW_ALPHA	esUtil.h	42;"	kind:d
-ES_WINDOW_DEPTH	esUtil.h	44;"	kind:d
-ES_WINDOW_MULTISAMPLE	esUtil.h	48;"	kind:d
-ES_WINDOW_RGB	esUtil.h	40;"	kind:d
-ES_WINDOW_STENCIL	esUtil.h	46;"	kind:d
-FALSE	esUtil.h	56;"	kind:d
-Freetype	context.hpp	/^} Freetype;$/;"	t	typeref:struct:__anon1
+ESCALLBACK	esUtil.h	36;"	d
+ESContext	esUtil.h	/^} ESContext;$/;"	t	typeref:struct:_escontext
+ESMatrix	esUtil.h	/^} ESMatrix;$/;"	t	typeref:struct:__anon4
+ESUTIL_API	esUtil.h	35;"	d
+ESUTIL_H	esUtil.h	18;"	d
+ES_WINDOW_ALPHA	esUtil.h	42;"	d
+ES_WINDOW_DEPTH	esUtil.h	44;"	d
+ES_WINDOW_MULTISAMPLE	esUtil.h	48;"	d
+ES_WINDOW_RGB	esUtil.h	40;"	d
+ES_WINDOW_STENCIL	esUtil.h	46;"	d
+FALSE	esUtil.h	56;"	d
+Freetype	esUtil.h	/^} Freetype;$/;"	t	typeref:struct:__anon1
 Init	egl.cpp	/^int Init(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
 Init	gl.cpp	/^int Init(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
 Init	gl.hpp	/^int Init(ESContext *esContext);$/;"	p	signature:(ESContext *esContext)
@@ -29,40 +29,47 @@ LoadShader	gl.hpp	/^GLuint LoadShader(GLenum, const char *);$/;"	p	signature:(GL
 MOUSE	input.cpp	23;"	d	file:
 OVECCOUNT	input.cpp	24;"	d	file:
 PI	render.cpp	45;"	d	file:
-TRUE	esUtil.h	59;"	kind:d
-Uniforms	context.hpp	/^} Uniforms;$/;"	t	typeref:struct:__anon2
-UserData	context.hpp	/^} UserData;$/;"	t	typeref:struct:__anon3
+TRUE	esUtil.h	59;"	d
+Uniforms	esUtil.h	/^} Uniforms;$/;"	t	typeref:struct:__anon2
 UserData	egl.cpp	/^} UserData;$/;"	t	typeref:struct:__anon1	file:
+UserData	esUtil.h	/^} UserData;$/;"	t	typeref:struct:__anon3
 WinCreate	esUtil.cpp	/^EGLBoolean WinCreate(ESContext *esContext, const char *title)$/;"	f	signature:(ESContext *esContext, const char *title)
-__anon1::a	test.cpp	/^  int a[5];$/;"	m	struct:__anon1	file:	access:public
-__anon1::face	context.hpp	/^  FT_Face face;$/;"	m	struct:__anon1	access:public
-__anon1::ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:__anon1	access:public
-__anon1::g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:__anon1	access:public
+__anon1::face	esUtil.h	/^  FT_Face face;$/;"	m	struct:__anon1	access:public
+__anon1::ft	esUtil.h	/^  FT_Library ft;$/;"	m	struct:__anon1	access:public
+__anon1::g	esUtil.h	/^  FT_GlyphSlot g;$/;"	m	struct:__anon1	access:public
 __anon1::kbd	input.h	/^  int kbd;$/;"	m	struct:__anon1	access:public
 __anon1::mouse	input.h	/^  int mouse;$/;"	m	struct:__anon1	access:public
 __anon1::programObject	egl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
-__anon2::uniform_color	context.hpp	/^  GLint uniform_color;$/;"	m	struct:__anon2	access:public
-__anon2::uniform_istext	context.hpp	/^  GLint uniform_istext;$/;"	m	struct:__anon2	access:public
-__anon3::debug	context.hpp	/^  bool debug;$/;"	m	struct:__anon3	access:public
-__anon3::freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:__anon3	access:public
-__anon3::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
-__anon3::programObject	context.hpp	/^  GLuint programObject;$/;"	m	struct:__anon3	access:public
-__anon3::run	context.hpp	/^  bool run;$/;"	m	struct:__anon3	access:public
-__anon3::uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:__anon3	access:public
-__anon3::vbo	context.hpp	/^  GLuint vbo[2];$/;"	m	struct:__anon3	access:public
-_escontext	esUtil.h	/^typedef struct _escontext$/;"	kind:s
-_escontext::drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
-_escontext::eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	kind:m	struct:_escontext	access:public
-_escontext::eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	kind:m	struct:_escontext	access:public
-_escontext::eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	kind:m	struct:_escontext	access:public
-_escontext::hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	kind:m	struct:_escontext	access:public
-_escontext::height	esUtil.h	/^   GLint       height;$/;"	kind:m	struct:_escontext	access:public
-_escontext::keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	kind:m	struct:_escontext	access:public
-_escontext::updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
-_escontext::userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
-_escontext::width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
-a	test.cpp	/^  int a[5];$/;"	m	struct:__anon1	file:	access:public
-abc	test.cpp	/^} abc;$/;"	t	typeref:struct:__anon1	file:
+__anon1::run	test.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
+__anon1::run	test3.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
+__anon2::bb	test.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
+__anon2::bb	test3.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
+__anon2::uniform_color	esUtil.h	/^  GLint uniform_color;$/;"	m	struct:__anon2	access:public
+__anon2::uniform_istext	esUtil.h	/^  GLint uniform_istext;$/;"	m	struct:__anon2	access:public
+__anon3::debug	esUtil.h	/^  bool debug;$/;"	m	struct:__anon3	access:public
+__anon3::freetype	esUtil.h	/^  Freetype freetype;$/;"	m	struct:__anon3	access:public
+__anon3::programObject	esUtil.h	/^  GLuint programObject;$/;"	m	struct:__anon3	access:public
+__anon3::run	esUtil.h	/^  bool run;$/;"	m	struct:__anon3	access:public
+__anon3::uniforms	esUtil.h	/^  Uniforms uniforms;$/;"	m	struct:__anon3	access:public
+__anon3::vbo	esUtil.h	/^  GLuint vbo[2];$/;"	m	struct:__anon3	access:public
+__anon4::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon4	access:public
+_escontext	esUtil.h	/^typedef struct _escontext$/;"	s
+_escontext::drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	m	struct:_escontext	access:public
+_escontext::eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	m	struct:_escontext	access:public
+_escontext::eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	m	struct:_escontext	access:public
+_escontext::eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	m	struct:_escontext	access:public
+_escontext::hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	m	struct:_escontext	access:public
+_escontext::height	esUtil.h	/^   GLint       height;$/;"	m	struct:_escontext	access:public
+_escontext::keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	m	struct:_escontext	access:public
+_escontext::updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	m	struct:_escontext	access:public
+_escontext::userData	esUtil.h	/^   UserData       userData;$/;"	m	struct:_escontext	access:public
+_escontext::width	esUtil.h	/^   GLint       width;$/;"	m	struct:_escontext	access:public
+abc	test.cpp	/^} abc;$/;"	t	typeref:struct:__anon2	file:
+abc	test3.cpp	/^} abc;$/;"	t	typeref:struct:__anon2	file:
+bb	test.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
+bb	test3.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
+bbb	test.cpp	/^} bbb;$/;"	t	typeref:struct:__anon1	file:
+bbb	test3.cpp	/^} bbb;$/;"	t	typeref:struct:__anon1	file:
 bone	skeleton.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
 bone	skeleton.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
 bone	skeleton.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
@@ -100,64 +107,67 @@ bone::multipleMatrix	skeleton.hpp	/^    void multipleMatrix (std::vector < std::
 bone::name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
 bone::parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 bone::weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
-debug	context.hpp	/^  bool debug;$/;"	m	struct:__anon3	access:public
 debug	egl.cpp	/^bool run = true, debug = true;$/;"	v
-drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	kind:m	struct:_escontext	access:public
+debug	esUtil.h	/^  bool debug;$/;"	m	struct:__anon3	access:public
+drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	m	struct:_escontext	access:public
 dump_bone	skeleton.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
 dump_matrix	skeleton.cpp	/^void dump_matrix(vector< vector< GLfloat > >* matrix, int tab = 0) {$/;"	f	signature:(vector< vector< GLfloat > >* matrix, int tab = 0)
-eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	kind:m	struct:_escontext	access:public
-eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	kind:m	struct:_escontext	access:public
-eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	kind:m	struct:_escontext	access:public
+eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	m	struct:_escontext	access:public
+eglDisplay	esUtil.h	/^   EGLDisplay  eglDisplay;$/;"	m	struct:_escontext	access:public
+eglSurface	esUtil.h	/^   EGLSurface  eglSurface;$/;"	m	struct:_escontext	access:public
 esCreateWindow	esUtil.cpp	/^GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, GLint width, GLint height, GLuint flags )$/;"	f	signature:( ESContext *esContext, const char* title, GLint width, GLint height, GLuint flags )
-esCreateWindow	esUtil.h	/^GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags );$/;"	kind:p	signature:( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags )
-esFrustum	esUtil.h	/^void ESUTIL_API esFrustum(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
-esGenCube	esUtil.h	/^int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals, $/;"	kind:p	signature:( float scale, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
-esGenSphere	esUtil.h	/^int ESUTIL_API esGenSphere ( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, $/;"	kind:p	signature:( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
+esCreateWindow	esUtil.h	/^GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags );$/;"	p	signature:( ESContext *esContext, const char *title, GLint width, GLint height, GLuint flags )
+esFrustum	esUtil.h	/^void ESUTIL_API esFrustum(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
+esGenCube	esUtil.h	/^int ESUTIL_API esGenCube ( float scale, GLfloat **vertices, GLfloat **normals, $/;"	p	signature:( float scale, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
+esGenSphere	esUtil.h	/^int ESUTIL_API esGenSphere ( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, $/;"	p	signature:( int numSlices, float radius, GLfloat **vertices, GLfloat **normals, GLfloat **texCoords, GLuint **indices )
 esInitContext	esUtil.cpp	/^void ESUTIL_API esInitContext ( ESContext *esContext )$/;"	f	signature:( ESContext *esContext )
-esInitContext	esUtil.h	/^void ESUTIL_API esInitContext ( ESContext *esContext );$/;"	kind:p	signature:( ESContext *esContext )
-esLoadProgram	esUtil.h	/^GLuint ESUTIL_API esLoadProgram ( const char *vertShaderSrc, const char *fragShaderSrc );$/;"	kind:p	signature:( const char *vertShaderSrc, const char *fragShaderSrc )
-esLoadShader	esUtil.h	/^GLuint ESUTIL_API esLoadShader ( GLenum type, const char *shaderSrc );$/;"	kind:p	signature:( GLenum type, const char *shaderSrc )
+esInitContext	esUtil.h	/^void ESUTIL_API esInitContext ( ESContext *esContext );$/;"	p	signature:( ESContext *esContext )
+esLoadProgram	esUtil.h	/^GLuint ESUTIL_API esLoadProgram ( const char *vertShaderSrc, const char *fragShaderSrc );$/;"	p	signature:( const char *vertShaderSrc, const char *fragShaderSrc )
+esLoadShader	esUtil.h	/^GLuint ESUTIL_API esLoadShader ( GLenum type, const char *shaderSrc );$/;"	p	signature:( GLenum type, const char *shaderSrc )
 esLoadTGA	esUtil.cpp	/^char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height )$/;"	f	signature:( char *fileName, int *width, int *height )
-esLoadTGA	esUtil.h	/^char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height );$/;"	kind:p	signature:( char *fileName, int *width, int *height )
+esLoadTGA	esUtil.h	/^char* ESUTIL_API esLoadTGA ( char *fileName, int *width, int *height );$/;"	p	signature:( char *fileName, int *width, int *height )
 esLogMessage	esUtil.cpp	/^void ESUTIL_API esLogMessage ( const char *formatStr, ... )$/;"	f	signature:( const char *formatStr, ... )
-esLogMessage	esUtil.h	/^void ESUTIL_API esLogMessage ( const char *formatStr, ... );$/;"	kind:p	signature:( const char *formatStr, ... )
+esLogMessage	esUtil.h	/^void ESUTIL_API esLogMessage ( const char *formatStr, ... );$/;"	p	signature:( const char *formatStr, ... )
 esMainLoop	esUtil.cpp	/^void ESUTIL_API esMainLoop ( ESContext *esContext )$/;"	f	signature:( ESContext *esContext )
-esMainLoop	esUtil.h	/^void ESUTIL_API esMainLoop ( ESContext *esContext );$/;"	kind:p	signature:( ESContext *esContext )
-esMatrixLoadIdentity	esUtil.h	/^void ESUTIL_API esMatrixLoadIdentity(ESMatrix *result);$/;"	kind:p	signature:(ESMatrix *result)
-esMatrixMultiply	esUtil.h	/^void ESUTIL_API esMatrixMultiply(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB);$/;"	kind:p	signature:(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB)
-esOrtho	esUtil.h	/^void ESUTIL_API esOrtho(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
-esPerspective	esUtil.h	/^void ESUTIL_API esPerspective(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ);$/;"	kind:p	signature:(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ)
+esMainLoop	esUtil.h	/^void ESUTIL_API esMainLoop ( ESContext *esContext );$/;"	p	signature:( ESContext *esContext )
+esMatrixLoadIdentity	esUtil.h	/^void ESUTIL_API esMatrixLoadIdentity(ESMatrix *result);$/;"	p	signature:(ESMatrix *result)
+esMatrixMultiply	esUtil.h	/^void ESUTIL_API esMatrixMultiply(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB);$/;"	p	signature:(ESMatrix *result, ESMatrix *srcA, ESMatrix *srcB)
+esOrtho	esUtil.h	/^void ESUTIL_API esOrtho(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ);$/;"	p	signature:(ESMatrix *result, float left, float right, float bottom, float top, float nearZ, float farZ)
+esPerspective	esUtil.h	/^void ESUTIL_API esPerspective(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ);$/;"	p	signature:(ESMatrix *result, float fovy, float aspect, float nearZ, float farZ)
 esRegisterDrawFunc	esUtil.cpp	/^void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )$/;"	f	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) (ESContext* ) )
-esRegisterDrawFunc	esUtil.h	/^void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) );$/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) )
+esRegisterDrawFunc	esUtil.h	/^void ESUTIL_API esRegisterDrawFunc ( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) );$/;"	p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext* ) )
 esRegisterKeyFunc	esUtil.cpp	/^void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext,$/;"	f	signature:( ESContext *esContext, void (ESCALLBACK *keyFunc) (ESContext*, unsigned char, int, int ) )
-esRegisterKeyFunc	esUtil.h	/^void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext, $/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext*, unsigned char, int, int ) )
+esRegisterKeyFunc	esUtil.h	/^void ESUTIL_API esRegisterKeyFunc ( ESContext *esContext, $/;"	p	signature:( ESContext *esContext, void (ESCALLBACK *drawFunc) ( ESContext*, unsigned char, int, int ) )
 esRegisterUpdateFunc	esUtil.cpp	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )$/;"	f	signature:( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
-esRegisterUpdateFunc	esUtil.h	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) );$/;"	kind:p	signature:( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
-esRotate	esUtil.h	/^void ESUTIL_API esRotate(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);$/;"	kind:p	signature:(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
-esScale	esUtil.h	/^void ESUTIL_API esScale(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz)
-esTranslate	esUtil.h	/^void ESUTIL_API esTranslate(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz);$/;"	kind:p	signature:(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz)
+esRegisterUpdateFunc	esUtil.h	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) );$/;"	p	signature:( ESContext *esContext, void (ESCALLBACK *updateFunc) ( ESContext*, float ) )
+esRotate	esUtil.h	/^void ESUTIL_API esRotate(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);$/;"	p	signature:(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
+esScale	esUtil.h	/^void ESUTIL_API esScale(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz);$/;"	p	signature:(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz)
+esTranslate	esUtil.h	/^void ESUTIL_API esTranslate(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz);$/;"	p	signature:(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz)
 event_thread	main.cpp	/^void event_thread(ESContext* esContext) {$/;"	f	signature:(ESContext* esContext)
-face	context.hpp	/^  FT_Face face;$/;"	m	struct:__anon1	access:public
 face	egl.cpp	/^FT_Face face;$/;"	v
-freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:__anon3	access:public
-ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:__anon1	access:public
+face	esUtil.h	/^  FT_Face face;$/;"	m	struct:__anon1	access:public
+freetype	esUtil.h	/^  Freetype freetype;$/;"	m	struct:__anon3	access:public
 ft	egl.cpp	/^FT_Library ft;$/;"	v
-g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:__anon1	access:public
+ft	esUtil.h	/^  FT_Library ft;$/;"	m	struct:__anon1	access:public
 g	egl.cpp	/^FT_GlyphSlot g;$/;"	v
+g	esUtil.h	/^  FT_GlyphSlot g;$/;"	m	struct:__anon1	access:public
 graphic_thread	main.cpp	/^int graphic_thread(ESContext* esContext) {$/;"	f	signature:(ESContext* esContext)
-hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	kind:m	struct:_escontext	access:public
+hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	m	struct:_escontext	access:public
 handleEvent	input.cpp	/^void handleEvent(int fd, ESContext* esContext) {$/;"	f	signature:(int fd, ESContext* esContext)
 handleEvent	input.h	/^void handleEvent(int, ESContext*);$/;"	p	signature:(int, ESContext*)
-height	esUtil.h	/^   GLint       height;$/;"	kind:m	struct:_escontext	access:public
+height	esUtil.h	/^   GLint       height;$/;"	m	struct:_escontext	access:public
 ii	egl.cpp	/^unsigned int ii = 0;$/;"	v
 ii	render.cpp	/^unsigned int ii = 0;$/;"	v
 initInput	input.cpp	/^inputFds initInput() {$/;"	f	signature:()
 initInput	input.h	/^inputFds initInput();$/;"	p	signature:()
 inputFds	input.h	/^} inputFds;$/;"	t	typeref:struct:__anon1
 kbd	input.h	/^  int kbd;$/;"	m	struct:__anon1	access:public
-keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	kind:m	struct:_escontext	access:public
-m	esUtil.h	/^    GLfloat   m[4][4];$/;"	kind:m	struct:__anon3	access:public
-m	test.cpp	/^void m(abc* x) {$/;"	f	signature:(abc* x)
+keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	m	struct:_escontext	access:public
+m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon4	access:public
+m	test.cpp	/^void m(abc*);$/;"	p	file:	signature:(abc*)
+m	test3.cpp	/^void m(abc* x) {$/;"	f	signature:(abc* x)
+m2	test.cpp	/^void m2(abc*);$/;"	p	file:	signature:(abc*)
+m2	test3.cpp	/^void m2(abc* x) {$/;"	f	signature:(abc* x)
 mAngle	egl.cpp	/^float mAngle = 0.0;$/;"	v
 mAngle	gl.cpp	/^float mAngle = 0.0;$/;"	v
 mAngleCos	egl.cpp	/^float mAngleCos = 0.0;$/;"	v
@@ -177,32 +187,33 @@ name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
 parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 parseInputHandler	input.cpp	/^char* parseInputHandler(int type, char* subject) {$/;"	f	signature:(int type, char* subject)
 parseInputHandler	input.h	/^char* parseInputHandler(int, char*);$/;"	p	signature:(int, char*)
-programObject	context.hpp	/^  GLuint programObject;$/;"	m	struct:__anon3	access:public
 programObject	egl.cpp	/^  GLuint programObject;$/;"	m	struct:__anon1	file:	access:public
+programObject	esUtil.h	/^  GLuint programObject;$/;"	m	struct:__anon3	access:public
 render_text	egl.cpp	/^void render_text(const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(const char *text, float x, float y, float sx, float sy)
 render_text	renderUtils.cpp	/^void render_text(ESContext* esContext, const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(ESContext* esContext, const char *text, float x, float y, float sx, float sy)
 render_text	renderUtils.hpp	/^void render_text(ESContext*,const char*, float, float, float, float);$/;"	p	signature:(ESContext*,const char*, float, float, float, float)
-run	context.hpp	/^  bool run;$/;"	m	struct:__anon3	access:public
 run	egl.cpp	/^bool run = true, debug = true;$/;"	v
+run	esUtil.h	/^  bool run;$/;"	m	struct:__anon3	access:public
+run	test.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
+run	test3.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
+t1	test.cpp	/^void t1() {$/;"	f	signature:()
+t2	test.cpp	/^void t2() {$/;"	f	signature:()
 tempAngle	egl.cpp	/^float tempAngle = 0.0;$/;"	v
 tempAngle	gl.cpp	/^float tempAngle = 0.0;$/;"	v
-uniform_color	context.hpp	/^  GLint uniform_color;$/;"	m	struct:__anon2	access:public
 uniform_color	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
-uniform_color	gl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
-uniform_istext	context.hpp	/^  GLint uniform_istext;$/;"	m	struct:__anon2	access:public
+uniform_color	esUtil.h	/^  GLint uniform_color;$/;"	m	struct:__anon2	access:public
 uniform_istext	egl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
-uniform_istext	gl.cpp	/^GLint uniform_istext, uniform_color;$/;"	v
-uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:__anon3	access:public
-updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	kind:m	struct:_escontext	access:public
-userData	esUtil.h	/^   void*       userData;$/;"	kind:m	struct:_escontext	access:public
+uniform_istext	esUtil.h	/^  GLint uniform_istext;$/;"	m	struct:__anon2	access:public
+uniforms	esUtil.h	/^  Uniforms uniforms;$/;"	m	struct:__anon3	access:public
+updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	m	struct:_escontext	access:public
+userData	esUtil.h	/^   UserData       userData;$/;"	m	struct:_escontext	access:public
 userInterrupt	esUtil.cpp	/^GLboolean userInterrupt(ESContext *esContext)$/;"	f	signature:(ESContext *esContext)
-vbo	context.hpp	/^  GLuint vbo[2];$/;"	m	struct:__anon3	access:public
 vbo	egl.cpp	/^GLuint vbo[2];$/;"	v
-vbo	gl.cpp	/^GLuint vbo[2];$/;"	v
+vbo	esUtil.h	/^  GLuint vbo[2];$/;"	m	struct:__anon3	access:public
 wCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 wCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
-width	esUtil.h	/^   GLint       width;$/;"	kind:m	struct:_escontext	access:public
+width	esUtil.h	/^   GLint       width;$/;"	m	struct:_escontext	access:public
 xAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 xAngle	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 xCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
@@ -216,6 +227,7 @@ yCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 
 yCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 yRadius	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 yRadius	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
+z	test.cpp	/^abc* z;$/;"	v
 zAngle	egl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 zAngle	gl.cpp	/^float xAngle = 0.0, xRadius = 0.0, yAngle = 0.0, yRadius = 0.0, zAngle = 0.0, zRadius = 0.0;$/;"	v
 zCustom	egl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v

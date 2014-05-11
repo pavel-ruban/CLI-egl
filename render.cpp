@@ -11,7 +11,7 @@ unsigned int ii = 0;
  * Draw a triangle using the shader pair created in Init()
  */
 void Draw(ESContext* esContext) {
-  UserData *userData = (UserData*) esContext->userData;
+  UserData *userData = &esContext->userData;
 
   // Set the viewport
   glViewport(0, 0, esContext->width, esContext->height);
