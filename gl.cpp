@@ -83,9 +83,21 @@ GLuint LoadShader(GLenum type, const char *shaderSrc) {
 // Initialize the shader and program object
 //
 int Init(ESContext *esContext) {
-  esContext->userData = malloc(sizeof(UserData));
-
   UserData *userData = (UserData*) esContext->userData;
+  
+  // Init free type.
+  if(FT_Init_FreeType(&userData->freetype.ft)) {
+    fprintf(stderr, "Could not init freetype library\n");
+    return 1;
+  }
+  if(FT_New_Face(userData->freetype.ft, "UbuntuMono-R.ttf", 0, &userData->freetype.face)) {
+    fprintf(stderr, "Could not open font\n");
+    return 1;
+  } 
+
+  userData->freetype.g = userData->freetype.face->glyph; 
+
+  FT_Set_Pixel_Sizes(userData->freetype.face, 0, 18);
 
   std::ifstream vsource("vertex_shader.glsl");
   std::string v_str(

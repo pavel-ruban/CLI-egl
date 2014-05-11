@@ -25,13 +25,11 @@
 #include <sys/time.h>
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
-#include "esUtil.h"
+#include "context.hpp"
 
 #include  <X11/Xlib.h>
 #include  <X11/Xatom.h>
 #include  <X11/Xutil.h>
-
-extern bool run;
 
 // X11 related local variables
 static Display *x_display = NULL;
@@ -291,6 +289,8 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
 
 void ESUTIL_API esMainLoop ( ESContext *esContext )
 {
+    UserData* userData = (UserData*) esContext->userData;
+
     struct timeval t1, t2;
     struct timezone tz;
     float deltatime;
@@ -299,7 +299,7 @@ void ESUTIL_API esMainLoop ( ESContext *esContext )
 
     gettimeofday ( &t1 , &tz );
 
-    while(run) {
+    while(userData->run) {
       gettimeofday(&t2, &tz);
       deltatime = (float)(t2.tv_sec - t1.tv_sec + (t2.tv_usec - t1.tv_usec) * 1e-6);
       t1 = t2;

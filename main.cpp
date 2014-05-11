@@ -1,51 +1,28 @@
 #include "common.hpp"
-#include "context.hpp"
 #include "gl.hpp"
 #include "render.hpp"
 #include "input.h"
-
-Context context;
-
-bool run = true, debug = true;
+#include <boost/thread.hpp>
 
 /**
  * Init graphic & start render process.
  */
-int graphic_thread() {
-  ESContext esContext;
-  UserData userData;
+int graphic_thread(ESContext* esContext) {
+  esCreateWindow(esContext, "Hello Triangle", 1080, 1080, ES_WINDOW_RGB);
 
-  // Init free type.
-  if(FT_Init_FreeType(&context.freetype.ft)) {
-    fprintf(stderr, "Could not init freetype library\n");
-    return 1;
-  }
-  if(FT_New_Face(context.freetype.ft, "UbuntuMono-R.ttf", 0, &context.freetype.face)) {
-    fprintf(stderr, "Could not open font\n");
-    return 1;
-  } 
-
-  context.freetype.g = context.freetype.face->glyph; 
-
-  FT_Set_Pixel_Sizes(context.freetype.face, 0, 18);
-
-  esInitContext(&esContext);
-  esContext.userData = &userData;
-
-  esCreateWindow(&esContext, "Hello Triangle", 1080, 1080, ES_WINDOW_RGB);
-
-  if (!Init(&esContext))
+  if (!Init(esContext))
     return 0;
 
-  esRegisterDrawFunc(&esContext, Draw);
+  esRegisterDrawFunc(esContext, Draw);
 
-  esMainLoop(&esContext);
+  esMainLoop(esContext);
 }
 
 /**
  * Handle input handlers.
  */
-void event_thread() {
+void event_thread(ESContext* esContext) {
+  UserData* data = (UserData*) esContext->userData;
   int retval, max_fd;
   fd_set input;
   inputFds inputFds = initInput(); 
@@ -59,7 +36,7 @@ void event_thread() {
 
   printf("mouse fd = %i\nkeyboard fd = %i", inputFds.mouse, inputFds.kbd);
 
-  while (run) {
+  while (data->run) {
     /* Initialize the input set */
     FD_ZERO(&input);
     FD_SET(inputFds.mouse, &input);
@@ -76,10 +53,10 @@ void event_thread() {
     else {
       /* We have input */
       if (FD_ISSET(inputFds.mouse, &input)) {
-        handleEvent(inputFds.mouse);
+        handleEvent(inputFds.mouse, esContext);
       }
       else if (FD_ISSET(inputFds.kbd, &input)) {
-        handleEvent(inputFds.kbd);
+        handleEvent(inputFds.kbd, esContext);
       }
     }
   }
@@ -89,12 +66,21 @@ void event_thread() {
  * Programm start.
  */
 int main(int argc, char *argv[]) {
-  // Split program into two separate threads.
-  boost::thread eventThread(event_thread);
-  boost::thread graphicThread(graphic_thread);
+  ESContext* esContext = (ESContext*) malloc(sizeof(ESContext));
 
-  eventThread.join();
+  esInitContext(esContext);
+  UserData* userData = (UserData*) malloc(sizeof(UserData));
+  esContext->userData = userData;
+  memset(userData, 0, sizeof(UserData));
+  userData->run = true;
+  userData->debug = true;
+
+  // Split program into two separate threads.
+  boost::thread graphicThread(boost::bind(graphic_thread, boost::ref(esContext)));
+  boost::thread eventThread(boost::bind(event_thread, boost::ref(esContext)));
+
   graphicThread.join();
+  eventThread.join();
 
   return 0;
 }

@@ -1,10 +1,27 @@
+#include <errno.h>
+#include <fcntl.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <time.h>
+#include <unistd.h>
+#include <boost/thread.hpp>
+#include <linux/input.h>
+#include <pcre.h>
+#include <iomanip>
+#include <locale>
+#include <sstream>
+#include <math.h>
+#include <sys/select.h>
+#include <sys/types.h>
 #include "input.h"
 
 #define KEYBOARD 0
 #define MOUSE 1
 #define OVECCOUNT 30
-
-extern bool run, debug;
 
 extern float xAngle, xRadius, yAngle, yRadius, zAngle, zRadius, xCustom, yCustom;
 
@@ -158,7 +175,8 @@ inputFds initInput() {
 /**
  * Process incoming events.
  */
-void handleEvent(int fd) {
+void handleEvent(int fd, ESContext* esContext) {
+  UserData* userData = (UserData*) esContext->userData; 
 
   struct input_event ev;
   size_t bytes;
@@ -172,7 +190,7 @@ void handleEvent(int fd) {
       switch (ev.code) {
         case 1:
           if (ev.value == 1) {
-            run = false;
+            userData->run = false;
           }
           break;
 
@@ -223,11 +241,11 @@ void handleEvent(int fd) {
 
         case 31:
           if (ev.value == 1) {
-            if (debug) {
-              debug = false;
+            if (userData->debug) {
+              userData->debug = false;
             }
             else {
-              debug = true;
+              userData->debug = true;
             }
             yAngle -= 1.0;
           }

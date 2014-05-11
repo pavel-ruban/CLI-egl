@@ -3,20 +3,14 @@
 #include "context.hpp"
 #include "renderUtils.hpp"
 
-extern bool run, debug;
-
 extern float xAngle, xRadius, yAngle, yRadius, zAngle, zRadius, xCustom, yCustom;
 extern float mAngle, mAngleSin, mAngleCos, tempAngle;
-extern GLint uniform_istext, uniform_color;
-extern GLuint vbo[2];
-
 unsigned int ii = 0;
-extern Context context;
 
 /*
  * Draw a triangle using the shader pair created in Init()
  */
-void Draw(ESContext *esContext) {
+void Draw(ESContext* esContext) {
   UserData *userData = (UserData*) esContext->userData;
 
   // Set the viewport
@@ -106,20 +100,20 @@ void Draw(ESContext *esContext) {
     {1, 1},
   };
 
-  glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
+  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof texCoords, texCoords, GL_DYNAMIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
+  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof vVertices, vVertices, GL_DYNAMIC_DRAW);
 
-  glUniform1i(uniform_istext, 0);
+  glUniform1i(userData->uniforms.uniform_istext, 0);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
-  if (debug) {
+  if (userData->debug) {
     float sx = 2.0 / esContext->width;
     float sy = 2.0 / esContext->height;
 
-    glUniform1i(uniform_istext, 1);
-    glUniform4f(uniform_color, 1.0, 1.0, 1.0, 1.0);
+    glUniform1i(userData->uniforms.uniform_istext, 1);
+    glUniform4f(userData->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
 
     float stride = -0.1, rx = 0.0, ry = 0.0;
     int offset = 0;
@@ -137,10 +131,10 @@ void Draw(ESContext *esContext) {
         case 1:
           stride += 0.04;
           sprintf(buff, "angles:");
-          render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+          render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
           stride += 0.04;
           sprintf(buff, "---------------------------");
-          render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+          render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
           stride += 0.04;
           sprintf(buff, "angle a %f", mAngle);
           break;
@@ -154,15 +148,15 @@ void Draw(ESContext *esContext) {
           break;
       }
 
-      render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+      render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     }
 
     stride += 0.08;
     sprintf(buff, "Vertices:");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "---------------------------");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
 
     for (int i = 0; i < 4; i++) {
       stride += 0.04;
@@ -172,27 +166,27 @@ void Draw(ESContext *esContext) {
       offset += 4;
 
       sprintf(buff, "vertex%i x %f, y %f", i, rx, ry);
-      render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+      render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     }
 
     stride += 0.08;
     sprintf(buff, "using rotate matrice:");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "---------------------------");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.08;
     sprintf(buff, "{Cos(a), -Sin(a), 0, 0");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, " Sin(a),  Cos(a), 0, 0");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "      0,       0, 1, 0");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "      0,       0, 0, 1}");
-    render_text(buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
   }
 
   ii++;

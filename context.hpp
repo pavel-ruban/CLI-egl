@@ -13,12 +13,16 @@ typedef struct {
 } Freetype;
 
 typedef struct {
-  // Handle to a program object
-  GLuint programObject;
-
-} UserData;
+  GLint uniform_istext;
+  GLint uniform_color;
+} Uniforms;
 
 typedef struct {
+  // Handle to a program object
+  GLuint programObject;
+  GLuint vbo[2];
   Freetype freetype;
-} Context; 
-
+  Uniforms uniforms;
+  bool run;
+  bool debug;
+} UserData;
