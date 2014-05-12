@@ -266,7 +266,6 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
       return GL_FALSE;
    }
 
-  
    if ( !CreateEGLContext ( esContext->hWnd,
                             &esContext->eglDisplay,
                             &esContext->eglContext,
@@ -276,7 +275,6 @@ GLboolean ESUTIL_API esCreateWindow ( ESContext *esContext, const char* title, G
       return GL_FALSE;
    }
    
-
    return GL_TRUE;
 }
 

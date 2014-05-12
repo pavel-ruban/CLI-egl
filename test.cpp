@@ -20,9 +20,6 @@ typedef struct {
 
 abc* z;
 
-void m(abc*);
-void m2(abc*);
-
 void t1() {
   while (1) {
     printf("thread1: %i\n", z->bb->run);
@@ -30,23 +27,39 @@ void t1() {
 }
 
 void t2() {
-    m2(z);
   while (1) {
     printf("thread2: %i\n", z->bb->run);
   }
 }
 
 int main(int argc, char* argv[]) {
-  using namespace std;
-  z = (abc*) malloc(sizeof(abc));
-  z->bb = (bbb*) malloc(sizeof(bbb));
-  z->bb->run = 1;
+  #define ABC
+  #ifndef ABC
+    using namespace std;
+    z = (abc*) malloc(sizeof(abc));
+    z->bb = (bbb*) malloc(sizeof(bbb));
+    z->bb->run = 1;
 
-  boost::thread graphicThread(t1);
-  boost::thread eventThread(t2);
+    boost::thread graphicThread(t1);
+    boost::thread eventThread(t2);
 
-  graphicThread.join();
-  eventThread.join();
+    graphicThread.join();
+    eventThread.join();
+  #else
+    struct ac {
+      int x;
+      int b;
+    };
+
+    ac n;
+    n.x = 3;
+    n.b = 6;
+    ac v;
+
+    v = n;
+
+    printf("hey hey!! %i, %i\n", v.x, v.b);
+  #endif
 
   return 0;
 }

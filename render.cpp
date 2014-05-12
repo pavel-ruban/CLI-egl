@@ -7,14 +7,15 @@ extern float xAngle, xRadius, yAngle, yRadius, zAngle, zRadius, xCustom, yCustom
 extern float mAngle, mAngleSin, mAngleCos, tempAngle;
 unsigned int ii = 0;
 
+
 /*
  * Draw a triangle using the shader pair created in Init()
  */
-void Draw(ESContext* esContext) {
-  UserData *userData = &esContext->userData;
+void Draw(CONTEXT_TYPE context) {
+  UserData *userData = &context->userData;
 
   // Set the viewport
-  glViewport(0, 0, esContext->width, esContext->height);
+  glViewport(0, 0, context->width, context->height);
 
   // Clear the color buffer
   glClear(GL_COLOR_BUFFER_BIT);
@@ -109,8 +110,8 @@ void Draw(ESContext* esContext) {
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
   if (userData->debug) {
-    float sx = 2.0 / esContext->width;
-    float sy = 2.0 / esContext->height;
+    float sx = 2.0 / context->width;
+    float sy = 2.0 / context->height;
 
     glUniform1i(userData->uniforms.uniform_istext, 1);
     glUniform4f(userData->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
@@ -131,10 +132,10 @@ void Draw(ESContext* esContext) {
         case 1:
           stride += 0.04;
           sprintf(buff, "angles:");
-          render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+          render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
           stride += 0.04;
           sprintf(buff, "---------------------------");
-          render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+          render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
           stride += 0.04;
           sprintf(buff, "angle a %f", mAngle);
           break;
@@ -148,15 +149,15 @@ void Draw(ESContext* esContext) {
           break;
       }
 
-      render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+      render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     }
 
     stride += 0.08;
     sprintf(buff, "Vertices:");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "---------------------------");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
 
     for (int i = 0; i < 4; i++) {
       stride += 0.04;
@@ -166,27 +167,27 @@ void Draw(ESContext* esContext) {
       offset += 4;
 
       sprintf(buff, "vertex%i x %f, y %f", i, rx, ry);
-      render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+      render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     }
 
     stride += 0.08;
     sprintf(buff, "using rotate matrice:");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "---------------------------");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.08;
     sprintf(buff, "{Cos(a), -Sin(a), 0, 0");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, " Sin(a),  Cos(a), 0, 0");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "      0,       0, 1, 0");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
     stride += 0.04;
     sprintf(buff, "      0,       0, 0, 1}");
-    render_text(esContext, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
+    render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
   }
 
   ii++;
