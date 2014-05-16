@@ -1,1 +1,3 @@
-void Draw(ESContext *esContext);
+#include "platform.h"
+
+void Draw(CONTEXT_TYPE*);

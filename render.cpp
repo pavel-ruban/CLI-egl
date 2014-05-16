@@ -11,17 +11,17 @@ unsigned int ii = 0;
 /*
  * Draw a triangle using the shader pair created in Init()
  */
-void Draw(CONTEXT_TYPE context) {
-  UserData *userData = &context->userData;
+void Draw(CONTEXT_TYPE *context) {
+  Drm drm = context->drm;
 
   // Set the viewport
-  glViewport(0, 0, context->width, context->height);
+  glViewport(0, 0, drm.mode->hdisplay, drm.mode->vdisplay);
 
   // Clear the color buffer
   glClear(GL_COLOR_BUFFER_BIT);
 
   // Use the program object
-  glUseProgram(userData->programObject);
+  glUseProgram(context->gl.program);
 
   // Define skeleton.
   GLfloat skeleton[3][2] = {
@@ -101,20 +101,20 @@ void Draw(CONTEXT_TYPE context) {
     {1, 1},
   };
 
-  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[1]);
+  glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof texCoords, texCoords, GL_DYNAMIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[0]);
+  glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof vVertices, vVertices, GL_DYNAMIC_DRAW);
 
-  glUniform1i(userData->uniforms.uniform_istext, 0);
+  glUniform1i(context->uniforms.uniform_istext, 0);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
-  if (userData->debug) {
-    float sx = 2.0 / context->width;
-    float sy = 2.0 / context->height;
+  if (context->flags.debug) {
+    float sx = 2.0 / drm.mode->hdisplay;
+    float sy = 2.0 / drm.mode->vdisplay;
 
-    glUniform1i(userData->uniforms.uniform_istext, 1);
-    glUniform4f(userData->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
+    glUniform1i(context->uniforms.uniform_istext, 1);
+    glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
 
     float stride = -0.1, rx = 0.0, ry = 0.0;
     int offset = 0;

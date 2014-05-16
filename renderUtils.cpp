@@ -1,17 +1,17 @@
 #include "esUtil.h"
 #include "context.hpp"
 
-void render_text(ESContext* esContext, const char *text, float x, float y, float sx, float sy) {
+void render_text(CONTEXT_TYPE *context, const char *text, float x, float y, float sx, float sy) {
 
-  UserData *userData = &esContext->userData;
+  Freetype *freetype = &context->freetype;
   const char *p;
  
   for(p = text; *p; p++) {
-    if(FT_Load_Char(userData->freetype.face, *p, FT_LOAD_RENDER))
+    if(FT_Load_Char(freetype->face, *p, FT_LOAD_RENDER))
         continue;
  
     FT_GlyphSlot g;
-    g = userData->freetype.g;
+    g = freetype->g;
 
     glTexImage2D(
       GL_TEXTURE_2D,
@@ -37,7 +37,7 @@ void render_text(ESContext* esContext, const char *text, float x, float y, float
         {x2 + w, -y2 - h, 1, 1},
     };
  
-    glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof box, box, GL_DYNAMIC_DRAW);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
  

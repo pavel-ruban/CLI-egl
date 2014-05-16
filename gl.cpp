@@ -77,22 +77,22 @@ GLuint LoadShader(GLenum type, const char *shaderSrc) {
 ///
 // Initialize the shader and program object
 //
-int Init(ESContext *esContext) {
-  UserData *userData = &esContext->userData;
+int Init(CONTEXT_TYPE *context) {
+  Freetype *freetype = &context->freetype;
   
   // Init free type.
-  if(FT_Init_FreeType(&userData->freetype.ft)) {
+  if(FT_Init_FreeType(&freetype->ft)) {
     fprintf(stderr, "Could not init freetype library\n");
     return 1;
   }
-  if(FT_New_Face(userData->freetype.ft, "UbuntuMono-R.ttf", 0, &userData->freetype.face)) {
+  if(FT_New_Face(freetype->ft, "UbuntuMono-R.ttf", 0, &freetype->face)) {
     fprintf(stderr, "Could not open font\n");
     return 1;
   } 
 
-  userData->freetype.g = userData->freetype.face->glyph; 
+  freetype->g = freetype->face->glyph; 
 
-  FT_Set_Pixel_Sizes(userData->freetype.face, 0, 18);
+  FT_Set_Pixel_Sizes(freetype->face, 0, 18);
 
   std::ifstream vsource("vertex_shader.glsl");
   std::string v_str(
@@ -156,7 +156,7 @@ int Init(ESContext *esContext) {
   }
 
   // Store the program object
-  userData->programObject = programObject;
+  context->gl.program = programObject;
 
   glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
@@ -193,7 +193,7 @@ int Init(ESContext *esContext) {
         break;
 
       case GL_INT:
-        userData->uniforms.uniform_istext = location;
+        context->uniforms.uniform_istext = location;
         break;
       
     }
@@ -202,7 +202,7 @@ int Init(ESContext *esContext) {
   GLint location;
   
   if ((location = glGetUniformLocation(programObject, "color")) != -1)
-    userData->uniforms.uniform_color = location;
+    context->uniforms.uniform_color = location;
     
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
@@ -212,13 +212,13 @@ int Init(ESContext *esContext) {
 
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   
-  glGenBuffers(2, userData->vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[0]);
+  glGenBuffers(2, context->gl.vbo);
+  glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[0]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 4 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
 
-  glBindBuffer(GL_ARRAY_BUFFER, userData->vbo[1]);
+  glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 2 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(1);
   glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);

@@ -175,9 +175,7 @@ inputFds initInput() {
 /**
  * Process incoming events.
  */
-void handleEvent(int fd, ESContext* esContext) {
-  UserData* userData = &esContext->userData; 
-
+void handleEvent(int fd, CONTEXT_TYPE *context) {
   struct input_event ev;
   size_t bytes;
   int ins = sizeof(struct input_event);
@@ -190,7 +188,7 @@ void handleEvent(int fd, ESContext* esContext) {
       switch (ev.code) {
         case 1:
           if (ev.value == 1) {
-            userData->run = false;
+            context->flags.run = false;
           }
           break;
 
@@ -241,11 +239,11 @@ void handleEvent(int fd, ESContext* esContext) {
 
         case 31:
           if (ev.value == 1) {
-            if (userData->debug) {
-              userData->debug = false;
+            if (context->flags.debug) {
+              context->flags.debug = false;
             }
             else {
-              userData->debug = true;
+              context->flags.debug = true;
             }
             yAngle -= 1.0;
           }

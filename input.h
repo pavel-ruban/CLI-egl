@@ -1,8 +1,7 @@
 #include "context.hpp"
-
 char* parseInputHandler(int, char*);
 
-void handleEvent(int, ESContext*);
+void handleEvent(int, CONTEXT_TYPE*);
 
 typedef struct {
   int mouse;

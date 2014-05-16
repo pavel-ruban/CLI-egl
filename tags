@@ -5,27 +5,29 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
 ABC	test.cpp	36;"	d	file:
-CONTEXT_TYPE	platform.h	5;"	d
-CONTEXT_TYPE	platform.h	7;"	d
-Context	context.hpp	/^struct Context {$/;"	s
-Context::drm	context.hpp	/^  Drm drm;$/;"	m	struct:Context	access:public
-Context::flags	context.hpp	/^  Flags flags;$/;"	m	struct:Context	access:public
-Context::freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:Context	access:public
-Context::gbm	context.hpp	/^  Gbm gbm;$/;"	m	struct:Context	access:public
-Context::gl	context.hpp	/^  GL gl;$/;"	m	struct:Context	access:public
-Context::uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:Context	access:public
+ARRAY_SIZE	drm.cpp	7;"	d	file:
+CONTEXT_TYPE	platform.h	13;"	d
+CONTEXT_TYPE	platform.h	20;"	d
+Context	context.hpp	/^  struct Context {$/;"	s
+Context::drm	context.hpp	/^    Drm drm;$/;"	m	struct:Context	access:public
+Context::flags	context.hpp	/^    Flags flags;$/;"	m	struct:Context	access:public
+Context::freetype	context.hpp	/^    Freetype freetype;$/;"	m	struct:Context	access:public
+Context::gbm	context.hpp	/^    Gbm gbm;$/;"	m	struct:Context	access:public
+Context::gl	context.hpp	/^    GL gl;$/;"	m	struct:Context	access:public
+Context::uniforms	context.hpp	/^    Uniforms uniforms;$/;"	m	struct:Context	access:public
 CreateEGLContext	esUtil.cpp	/^EGLBoolean CreateEGLContext ( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay,$/;"	f	signature:( EGLNativeWindowType hWnd, EGLDisplay* eglDisplay, EGLContext* eglContext, EGLSurface* eglSurface, EGLint attribList[])
-Draw	render.cpp	/^void Draw(CONTEXT_TYPE context) {$/;"	f	signature:(CONTEXT_TYPE context)
-Draw	render.hpp	/^void Draw(ESContext *esContext);$/;"	p	signature:(ESContext *esContext)
-Drm	context.hpp	/^struct Drm {$/;"	s
-Drm::connector_id	context.hpp	/^	uint32_t connector_id;$/;"	m	struct:Drm	access:public
-Drm::crtc_id	context.hpp	/^	uint32_t crtc_id;$/;"	m	struct:Drm	access:public
-Drm::fd	context.hpp	/^	int fd;$/;"	m	struct:Drm	access:public
-Drm::mode	context.hpp	/^	drmModeModeInfo *mode;$/;"	m	struct:Drm	access:public
-Drm::saved_crtc	context.hpp	/^	drmModeCrtc *saved_crtc;$/;"	m	struct:Drm	access:public
+Draw	render.cpp	/^void Draw(CONTEXT_TYPE *context) {$/;"	f	signature:(CONTEXT_TYPE *context)
+Draw	render.hpp	/^void Draw(CONTEXT_TYPE*);$/;"	p	signature:(CONTEXT_TYPE*)
+Drm	context.hpp	/^  struct Drm {$/;"	s
+Drm::connector_id	context.hpp	/^    uint32_t connector_id;$/;"	m	struct:Drm	access:public
+Drm::crtc_id	context.hpp	/^    uint32_t crtc_id;$/;"	m	struct:Drm	access:public
+Drm::fb	context.hpp	/^    struct drm_fb *fb;$/;"	m	struct:Drm	typeref:struct:Drm::drm_fb	access:public
+Drm::fd	context.hpp	/^    int fd;$/;"	m	struct:Drm	access:public
+Drm::mode	context.hpp	/^    drmModeModeInfo *mode;$/;"	m	struct:Drm	access:public
+Drm::saved_crtc	context.hpp	/^    drmModeCrtc *saved_crtc;$/;"	m	struct:Drm	access:public
 ESCALLBACK	esUtil.h	36;"	d
 ESContext	esUtil.h	/^} ESContext;$/;"	t	typeref:struct:_escontext
-ESMatrix	esUtil.h	/^} ESMatrix;$/;"	t	typeref:struct:__anon2
+ESMatrix	esUtil.h	/^} ESMatrix;$/;"	t	typeref:struct:__anon1
 ESUTIL_API	esUtil.h	35;"	d
 ESUTIL_H	esUtil.h	18;"	d
 ES_WINDOW_ALPHA	esUtil.h	42;"	d
@@ -34,30 +36,30 @@ ES_WINDOW_MULTISAMPLE	esUtil.h	48;"	d
 ES_WINDOW_RGB	esUtil.h	40;"	d
 ES_WINDOW_STENCIL	esUtil.h	46;"	d
 FALSE	esUtil.h	56;"	d
-Flags	context.hpp	/^struct Flags {$/;"	s
-Flags::debug	context.hpp	/^  bool debug;$/;"	m	struct:Flags	access:public
-Flags::run	context.hpp	/^  bool run;$/;"	m	struct:Flags	access:public
-Freetype	context.hpp	/^struct Freetype {$/;"	s
-Freetype::face	context.hpp	/^  FT_Face face;$/;"	m	struct:Freetype	access:public
-Freetype::ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:Freetype	access:public
-Freetype::g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:Freetype	access:public
-GL	context.hpp	/^struct GL {$/;"	s
-GL::colorsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-GL::config	context.hpp	/^	EGLConfig config;$/;"	m	struct:GL	access:public
-GL::context	context.hpp	/^	EGLContext context;$/;"	m	struct:GL	access:public
-GL::display	context.hpp	/^	EGLDisplay display;$/;"	m	struct:GL	access:public
-GL::modelviewmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-GL::modelviewprojectionmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-GL::normalmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-GL::normalsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-GL::positionsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-GL::program	context.hpp	/^	GLuint program;$/;"	m	struct:GL	access:public
-GL::surface	context.hpp	/^	EGLSurface surface;$/;"	m	struct:GL	access:public
-GL::vbo	context.hpp	/^	GLuint vbo[2];$/;"	m	struct:GL	access:public
-Gbm	context.hpp	/^struct Gbm {$/;"	s
-Gbm::dev	context.hpp	/^	struct gbm_device *dev;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_device	access:public
-Gbm::surface	context.hpp	/^	struct gbm_surface *surface;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_surface	access:public
-Init	gl.cpp	/^int Init(ESContext *esContext) {$/;"	f	signature:(ESContext *esContext)
+Flags	context.hpp	/^  struct Flags {$/;"	s
+Flags::debug	context.hpp	/^    bool debug;$/;"	m	struct:Flags	access:public
+Flags::run	context.hpp	/^    bool run;$/;"	m	struct:Flags	access:public
+Freetype	context.hpp	/^  struct Freetype {$/;"	s
+Freetype::face	context.hpp	/^    FT_Face face;$/;"	m	struct:Freetype	access:public
+Freetype::ft	context.hpp	/^    FT_Library ft;$/;"	m	struct:Freetype	access:public
+Freetype::g	context.hpp	/^    FT_GlyphSlot g;$/;"	m	struct:Freetype	access:public
+GL	context.hpp	/^  struct GL {$/;"	s
+GL::colorsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+GL::config	context.hpp	/^    EGLConfig config;$/;"	m	struct:GL	access:public
+GL::context	context.hpp	/^    EGLContext context;$/;"	m	struct:GL	access:public
+GL::display	context.hpp	/^    EGLDisplay display;$/;"	m	struct:GL	access:public
+GL::modelviewmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+GL::modelviewprojectionmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+GL::normalmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+GL::normalsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+GL::positionsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+GL::program	context.hpp	/^    GLuint program;$/;"	m	struct:GL	access:public
+GL::surface	context.hpp	/^    EGLSurface surface;$/;"	m	struct:GL	access:public
+GL::vbo	context.hpp	/^    GLuint vbo[2];$/;"	m	struct:GL	access:public
+Gbm	context.hpp	/^  struct Gbm {$/;"	s
+Gbm::dev	context.hpp	/^    struct gbm_device *dev;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_device	access:public
+Gbm::surface	context.hpp	/^    struct gbm_surface *surface;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_surface	access:public
+Init	gl.cpp	/^int Init(CONTEXT_TYPE *context) {$/;"	f	signature:(CONTEXT_TYPE *context)
 Init	gl.hpp	/^int Init(ESContext *esContext);$/;"	p	signature:(ESContext *esContext)
 KEYBOARD	input.cpp	22;"	d	file:
 LoadShader	gl.cpp	/^GLuint LoadShader(GLenum type, const char *shaderSrc) {$/;"	f	signature:(GLenum type, const char *shaderSrc)
@@ -66,25 +68,27 @@ MOUSE	input.cpp	23;"	d	file:
 OVECCOUNT	input.cpp	24;"	d	file:
 PI	render.cpp	46;"	d	file:
 TRUE	esUtil.h	59;"	d
-Uniforms	context.hpp	/^struct Uniforms {$/;"	s
-Uniforms::uniform_color	context.hpp	/^  GLint uniform_color;$/;"	m	struct:Uniforms	access:public
-Uniforms::uniform_istext	context.hpp	/^  GLint uniform_istext;$/;"	m	struct:Uniforms	access:public
-UserData	context.hpp	/^} UserData;$/;"	t	typeref:struct:__anon1
+Uniforms	context.hpp	/^  struct Uniforms {$/;"	s
+Uniforms::uniform_color	context.hpp	/^    GLint uniform_color;$/;"	m	struct:Uniforms	access:public
+Uniforms::uniform_istext	context.hpp	/^    GLint uniform_istext;$/;"	m	struct:Uniforms	access:public
+UserData	context.hpp	/^  } UserData;$/;"	t	typeref:struct:__anon1
 WinCreate	esUtil.cpp	/^EGLBoolean WinCreate(ESContext *esContext, const char *title)$/;"	f	signature:(ESContext *esContext, const char *title)
-__anon1::debug	context.hpp	/^  bool debug;$/;"	m	struct:__anon1	access:public
-__anon1::freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:__anon1	access:public
-__anon1::programObject	context.hpp	/^  GLuint programObject;$/;"	m	struct:__anon1	access:public
-__anon1::run	context.hpp	/^  bool run;$/;"	m	struct:__anon1	access:public
+__anon1::debug	context.hpp	/^    bool debug;$/;"	m	struct:__anon1	access:public
+__anon1::freetype	context.hpp	/^    Freetype freetype;$/;"	m	struct:__anon1	access:public
+__anon1::kbd	input.h	/^  int kbd;$/;"	m	struct:__anon1	access:public
+__anon1::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon1	access:public
+__anon1::mouse	input.h	/^  int mouse;$/;"	m	struct:__anon1	access:public
+__anon1::programObject	context.hpp	/^    GLuint programObject;$/;"	m	struct:__anon1	access:public
+__anon1::run	context.hpp	/^    bool run;$/;"	m	struct:__anon1	access:public
 __anon1::run	test.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
-__anon1::uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:__anon1	access:public
-__anon1::vbo	context.hpp	/^  GLuint vbo[2];$/;"	m	struct:__anon1	access:public
+__anon1::uniforms	context.hpp	/^    Uniforms uniforms;$/;"	m	struct:__anon1	access:public
+__anon1::vbo	context.hpp	/^    GLuint vbo[2];$/;"	m	struct:__anon1	access:public
 __anon2::bb	test.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
-__anon2::m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon2	access:public
-__anon3::kbd	input.h	/^  int kbd;$/;"	m	struct:__anon3	access:public
-__anon3::mouse	input.h	/^  int mouse;$/;"	m	struct:__anon3	access:public
 __anon4::run	test3.cpp	/^  int run;$/;"	m	struct:__anon4	file:	access:public
 __anon5::bb	test3.cpp	/^  bbb* bb;$/;"	m	struct:__anon5	file:	access:public
-_egl_use_drm	platform.h	1;"	d
+_egl_context_initilized	context.hpp	6;"	d
+_egl_initialized	platform.h	8;"	d
+_egl_use_drm	platform.h	2;"	d
 _escontext	esUtil.h	/^typedef struct _escontext$/;"	s
 _escontext::drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	m	struct:_escontext	access:public
 _escontext::eglContext	esUtil.h	/^   EGLContext  eglContext;$/;"	m	struct:_escontext	access:public
@@ -94,7 +98,7 @@ _escontext::hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	m	struct:_escontex
 _escontext::height	esUtil.h	/^   GLint       height;$/;"	m	struct:_escontext	access:public
 _escontext::keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	m	struct:_escontext	access:public
 _escontext::updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	m	struct:_escontext	access:public
-_escontext::userData	esUtil.h	/^   UserData       userData;$/;"	m	struct:_escontext	access:public
+_escontext::userData	esUtil.h	/^   void*       userData;$/;"	m	struct:_escontext	access:public
 _escontext::width	esUtil.h	/^   GLint       width;$/;"	m	struct:_escontext	access:public
 abc	test.cpp	/^} abc;$/;"	t	typeref:struct:__anon2	file:
 abc	test3.cpp	/^} abc;$/;"	t	typeref:struct:__anon5	file:
@@ -102,7 +106,7 @@ bb	test.cpp	/^  bbb* bb;$/;"	m	struct:__anon2	file:	access:public
 bb	test3.cpp	/^  bbb* bb;$/;"	m	struct:__anon5	file:	access:public
 bbb	test.cpp	/^} bbb;$/;"	t	typeref:struct:__anon1	file:
 bbb	test3.cpp	/^} bbb;$/;"	t	typeref:struct:__anon4	file:
-bo	context.hpp	/^	struct gbm_bo *bo;$/;"	m	struct:drm_fb	typeref:struct:drm_fb::gbm_bo	access:public
+bo	context.hpp	/^    struct gbm_bo *bo;$/;"	m	struct:drm_fb	typeref:struct:drm_fb::gbm_bo	access:public
 bone	skeleton.cpp	/^bone::bone() {$/;"	f	class:bone	signature:()
 bone	skeleton.cpp	/^bone::bone(bone* bone, int weight) {$/;"	f	class:bone	signature:(bone* bone, int weight)
 bone	skeleton.cpp	/^bone::bone(int weight) {$/;"	f	class:bone	signature:(int weight)
@@ -176,24 +180,24 @@ bone::parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 bone::parent	test2.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
 bone::weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
 bone::weight	test2.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public
-colorsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-config	context.hpp	/^	EGLConfig config;$/;"	m	struct:GL	access:public
-connector_id	context.hpp	/^	uint32_t connector_id;$/;"	m	struct:Drm	access:public
-context	context.hpp	/^	EGLContext context;$/;"	m	struct:GL	access:public
-crtc_id	context.hpp	/^	uint32_t crtc_id;$/;"	m	struct:Drm	access:public
-debug	context.hpp	/^  bool debug;$/;"	m	struct:Flags	access:public
-debug	context.hpp	/^  bool debug;$/;"	m	struct:__anon1	access:public
-dev	context.hpp	/^	struct gbm_device *dev;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_device	access:public
-display	context.hpp	/^	EGLDisplay display;$/;"	m	struct:GL	access:public
+colorsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+config	context.hpp	/^    EGLConfig config;$/;"	m	struct:GL	access:public
+connector_id	context.hpp	/^    uint32_t connector_id;$/;"	m	struct:Drm	access:public
+context	context.hpp	/^    EGLContext context;$/;"	m	struct:GL	access:public
+crtc_id	context.hpp	/^    uint32_t crtc_id;$/;"	m	struct:Drm	access:public
+debug	context.hpp	/^    bool debug;$/;"	m	struct:Flags	access:public
+debug	context.hpp	/^    bool debug;$/;"	m	struct:__anon1	access:public
+dev	context.hpp	/^    struct gbm_device *dev;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_device	access:public
+display	context.hpp	/^    EGLDisplay display;$/;"	m	struct:GL	access:public
 drawFunc	esUtil.h	/^   void (ESCALLBACK *drawFunc) ( struct _escontext * );$/;"	m	struct:_escontext	access:public
-drm	context.hpp	/^  Drm drm;$/;"	m	struct:Context	access:public
-drm_fb	context.hpp	/^struct drm_fb {$/;"	s
-drm_fb::bo	context.hpp	/^	struct gbm_bo *bo;$/;"	m	struct:drm_fb	typeref:struct:drm_fb::gbm_bo	access:public
-drm_fb::fb_id	context.hpp	/^	uint32_t fb_id;$/;"	m	struct:drm_fb	access:public
-drm_fb_destroy_callback	drm.cpp	/^static void drm_fb_destroy_callback(struct gbm_bo *bo, void *data) {$/;"	f	file:	signature:(struct gbm_bo *bo, void *data)
-drm_fb_destroy_callback	drm.hpp	/^static void drm_fb_destroy_callback(struct gbm_bo *bo, void *data);$/;"	p	signature:(struct gbm_bo *bo, void *data)
-drm_fb_get_from_bo	drm.cpp	/^static struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo) {$/;"	f	file:	signature:(struct gbm_bo *bo)
-drm_fb_get_from_bo	drm.hpp	/^static struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo, Context* context);$/;"	p	signature:(struct gbm_bo *bo, Context* context)
+drm	context.hpp	/^    Drm drm;$/;"	m	struct:Context	access:public
+drm_fb	context.hpp	/^  struct drm_fb {$/;"	s
+drm_fb::bo	context.hpp	/^    struct gbm_bo *bo;$/;"	m	struct:drm_fb	typeref:struct:drm_fb::gbm_bo	access:public
+drm_fb::fb_id	context.hpp	/^    uint32_t fb_id;$/;"	m	struct:drm_fb	access:public
+drm_fb_destroy_callback	drm.cpp	/^void drm_fb_destroy_callback(struct gbm_bo *bo, void *data) {$/;"	f	signature:(struct gbm_bo *bo, void *data)
+drm_fb_destroy_callback	drm.hpp	/^void drm_fb_destroy_callback(struct gbm_bo*, void*);$/;"	p	signature:(struct gbm_bo*, void*)
+drm_fb_get_from_bo	drm.cpp	/^struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo, CONTEXT_TYPE *context) {$/;"	f	signature:(struct gbm_bo *bo, CONTEXT_TYPE *context)
+drm_fb_get_from_bo	drm.hpp	/^struct drm_fb* drm_fb_get_from_bo(struct gbm_bo*, CONTEXT_TYPE*);$/;"	p	signature:(struct gbm_bo*, CONTEXT_TYPE*)
 dump_bone	skeleton.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
 dump_bone	test2.cpp	/^void dump_bone(bone* bone) {$/;"	f	signature:(bone* bone)
 dump_matrix	skeleton.cpp	/^void dump_matrix(vector< vector< GLfloat > >* matrix, int tab = 0) {$/;"	f	signature:(vector< vector< GLfloat > >* matrix, int tab = 0)
@@ -229,35 +233,36 @@ esRegisterUpdateFunc	esUtil.h	/^void ESUTIL_API esRegisterUpdateFunc ( ESContext
 esRotate	esUtil.h	/^void ESUTIL_API esRotate(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z);$/;"	p	signature:(ESMatrix *result, GLfloat angle, GLfloat x, GLfloat y, GLfloat z)
 esScale	esUtil.h	/^void ESUTIL_API esScale(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz);$/;"	p	signature:(ESMatrix *result, GLfloat sx, GLfloat sy, GLfloat sz)
 esTranslate	esUtil.h	/^void ESUTIL_API esTranslate(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz);$/;"	p	signature:(ESMatrix *result, GLfloat tx, GLfloat ty, GLfloat tz)
-event_thread	main.cpp	/^void event_thread(CONTEXT_TYPE context) {$/;"	f	signature:(CONTEXT_TYPE context)
-face	context.hpp	/^  FT_Face face;$/;"	m	struct:Freetype	access:public
-fb_id	context.hpp	/^	uint32_t fb_id;$/;"	m	struct:drm_fb	access:public
-fd	context.hpp	/^	int fd;$/;"	m	struct:Drm	access:public
-flags	context.hpp	/^  Flags flags;$/;"	m	struct:Context	access:public
-freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:Context	access:public
-freetype	context.hpp	/^  Freetype freetype;$/;"	m	struct:__anon1	access:public
-ft	context.hpp	/^  FT_Library ft;$/;"	m	struct:Freetype	access:public
-g	context.hpp	/^  FT_GlyphSlot g;$/;"	m	struct:Freetype	access:public
-gbm	context.hpp	/^  Gbm gbm;$/;"	m	struct:Context	access:public
-gl	context.hpp	/^  GL gl;$/;"	m	struct:Context	access:public
-graphic_thread	main.cpp	/^void graphic_thread(CONTEXT_TYPE context) {$/;"	f	signature:(CONTEXT_TYPE context)
+event_thread	main.cpp	/^void event_thread(CONTEXT_TYPE *context) {$/;"	f	signature:(CONTEXT_TYPE *context)
+face	context.hpp	/^    FT_Face face;$/;"	m	struct:Freetype	access:public
+fb	context.hpp	/^    struct drm_fb *fb;$/;"	m	struct:Drm	typeref:struct:Drm::drm_fb	access:public
+fb_id	context.hpp	/^    uint32_t fb_id;$/;"	m	struct:drm_fb	access:public
+fd	context.hpp	/^    int fd;$/;"	m	struct:Drm	access:public
+flags	context.hpp	/^    Flags flags;$/;"	m	struct:Context	access:public
+freetype	context.hpp	/^    Freetype freetype;$/;"	m	struct:Context	access:public
+freetype	context.hpp	/^    Freetype freetype;$/;"	m	struct:__anon1	access:public
+ft	context.hpp	/^    FT_Library ft;$/;"	m	struct:Freetype	access:public
+g	context.hpp	/^    FT_GlyphSlot g;$/;"	m	struct:Freetype	access:public
+gbm	context.hpp	/^    Gbm gbm;$/;"	m	struct:Context	access:public
+gl	context.hpp	/^    GL gl;$/;"	m	struct:Context	access:public
+graphic_thread	main.cpp	/^void graphic_thread(CONTEXT_TYPE *context) {$/;"	f	signature:(CONTEXT_TYPE *context)
 hWnd	esUtil.h	/^   EGLNativeWindowType  hWnd;$/;"	m	struct:_escontext	access:public
-handleEvent	input.cpp	/^void handleEvent(int fd, ESContext* esContext) {$/;"	f	signature:(int fd, ESContext* esContext)
-handleEvent	input.h	/^void handleEvent(int, ESContext*);$/;"	p	signature:(int, ESContext*)
+handleEvent	input.cpp	/^void handleEvent(int fd, CONTEXT_TYPE *context) {$/;"	f	signature:(int fd, CONTEXT_TYPE *context)
+handleEvent	input.h	/^void handleEvent(int, CONTEXT_TYPE*);$/;"	p	signature:(int, CONTEXT_TYPE*)
 height	esUtil.h	/^   GLint       height;$/;"	m	struct:_escontext	access:public
 ii	render.cpp	/^unsigned int ii = 0;$/;"	v
 initInput	input.cpp	/^inputFds initInput() {$/;"	f	signature:()
 initInput	input.h	/^inputFds initInput();$/;"	p	signature:()
-init_drm	drm.cpp	/^static int init_drm(Context* context) {$/;"	f	file:	signature:(Context* context)
-init_drm	drm.hpp	/^static int init_drm(Context* context);$/;"	p	signature:(Context* context)
-init_gbm	drm.cpp	/^static int init_gbm(Context* context) {$/;"	f	file:	signature:(Context* context)
-init_gbm	drm.hpp	/^static int init_gbm(Context* context);$/;"	p	signature:(Context* context)
-init_gl	drm.cpp	/^static int init_gl(Context* context) {$/;"	f	file:	signature:(Context* context)
-init_gl	drm.hpp	/^static int init_gl(Context* context);$/;"	p	signature:(Context* context)
-inputFds	input.h	/^} inputFds;$/;"	t	typeref:struct:__anon3
-kbd	input.h	/^  int kbd;$/;"	m	struct:__anon3	access:public
+init_drm	drm.cpp	/^int init_drm(Context* context) {$/;"	f	signature:(Context* context)
+init_drm	drm.hpp	/^int init_drm(CONTEXT_TYPE*);$/;"	p	signature:(CONTEXT_TYPE*)
+init_gbm	drm.cpp	/^int init_gbm(Context* context) {$/;"	f	signature:(Context* context)
+init_gbm	drm.hpp	/^int init_gbm(CONTEXT_TYPE*);$/;"	p	signature:(CONTEXT_TYPE*)
+init_gl	drm.cpp	/^int init_gl(Context* context) {$/;"	f	signature:(Context* context)
+init_gl	drm.hpp	/^int init_gl(CONTEXT_TYPE*);$/;"	p	signature:(CONTEXT_TYPE*)
+inputFds	input.h	/^} inputFds;$/;"	t	typeref:struct:__anon1
+kbd	input.h	/^  int kbd;$/;"	m	struct:__anon1	access:public
 keyFunc	esUtil.h	/^   void (ESCALLBACK *keyFunc) ( struct _escontext *, unsigned char, int, int );$/;"	m	struct:_escontext	access:public
-m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon2	access:public
+m	esUtil.h	/^    GLfloat   m[4][4];$/;"	m	struct:__anon1	access:public
 m	test3.cpp	/^void m(abc* x) {$/;"	f	signature:(abc* x)
 m2	test3.cpp	/^void m2(abc* x) {$/;"	f	signature:(abc* x)
 mAngle	gl.cpp	/^float mAngle = 0.0;$/;"	v
@@ -268,12 +273,12 @@ main	test.cpp	/^int main(int argc, char* argv[]) {$/;"	f	signature:(int argc, ch
 main	test2.cpp	/^int main(int argc, char* argv[]) {$/;"	f	signature:(int argc, char* argv[])
 matrix	skeleton.hpp	/^    std::vector< std::vector< GLfloat > > matrix;$/;"	m	class:bone	access:public
 matrix	test2.cpp	/^    vector< vector< GLfloat > > matrix;$/;"	m	class:bone	file:	access:public
-mode	context.hpp	/^	drmModeModeInfo *mode;$/;"	m	struct:Drm	access:public
-modelviewmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-modelviewprojectionmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-modeset_cleanup	drm.cpp	/^static void modeset_cleanup(int fd, Context* context) {$/;"	f	file:	signature:(int fd, Context* context)
-modeset_cleanup	drm.hpp	/^static void modeset_cleanup(int fd, Context* context);$/;"	p	signature:(int fd, Context* context)
-mouse	input.h	/^  int mouse;$/;"	m	struct:__anon3	access:public
+mode	context.hpp	/^    drmModeModeInfo *mode;$/;"	m	struct:Drm	access:public
+modelviewmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+modelviewprojectionmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+modeset_cleanup	drm.cpp	/^void modeset_cleanup(int fd, Context* context) {$/;"	f	signature:(int fd, Context* context)
+modeset_cleanup	drm.hpp	/^void modeset_cleanup(int fd, CONTEXT_TYPE*);$/;"	p	signature:(int fd, CONTEXT_TYPE*)
+mouse	input.h	/^  int mouse;$/;"	m	struct:__anon1	access:public
 multipleMatrices4x4	renderUtils.cpp	/^void multipleMatrices4x4(float* vVertices, float* mRotate) {$/;"	f	signature:(float* vVertices, float* mRotate)
 multipleMatrices4x4	renderUtils.hpp	/^void multipleMatrices4x4(float*, float*);$/;"	p	signature:(float*, float*)
 multipleMatrix	skeleton.cpp	/^void bone::multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	signature:(vector < vector < GLfloat > > mMatrix)
@@ -281,38 +286,38 @@ multipleMatrix	skeleton.hpp	/^    void multipleMatrix (std::vector < std::vector
 multipleMatrix	test2.cpp	/^    void multipleMatrix (vector < vector < GLfloat > > mMatrix) {$/;"	f	class:bone	access:public	signature:(vector < vector < GLfloat > > mMatrix)
 name	skeleton.hpp	/^    std::string name;$/;"	m	class:bone	access:public
 name	test2.cpp	/^    string name;$/;"	m	class:bone	file:	access:public
-normalmatrix	context.hpp	/^	GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
-normalsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-page_flip_handler	drm.cpp	/^static void page_flip_handler(int fd, unsigned int frame,$/;"	f	file:	signature:(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data)
-page_flip_handler	drm.hpp	/^static void page_flip_handler(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data);$/;"	p	signature:(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data)
+normalmatrix	context.hpp	/^    GLint modelviewmatrix, modelviewprojectionmatrix, normalmatrix;$/;"	m	struct:GL	access:public
+normalsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+page_flip_handler	drm.cpp	/^void page_flip_handler(int fd, unsigned int frame,$/;"	f	signature:(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data)
+page_flip_handler	drm.hpp	/^void page_flip_handler(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data);$/;"	p	signature:(int fd, unsigned int frame, unsigned int sec, unsigned int usec, void *data)
 parent	skeleton.hpp	/^    bone* parent;$/;"	m	class:bone	access:public
 parent	test2.cpp	/^    bone* parent;$/;"	m	class:bone	file:	access:public
 parseInputHandler	input.cpp	/^char* parseInputHandler(int type, char* subject) {$/;"	f	signature:(int type, char* subject)
 parseInputHandler	input.h	/^char* parseInputHandler(int, char*);$/;"	p	signature:(int, char*)
-positionsoffset	context.hpp	/^	GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
-program	context.hpp	/^	GLuint program;$/;"	m	struct:GL	access:public
-programObject	context.hpp	/^  GLuint programObject;$/;"	m	struct:__anon1	access:public
-render_text	renderUtils.cpp	/^void render_text(ESContext* esContext, const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(ESContext* esContext, const char *text, float x, float y, float sx, float sy)
-render_text	renderUtils.hpp	/^void render_text(ESContext*,const char*, float, float, float, float);$/;"	p	signature:(ESContext*,const char*, float, float, float, float)
-run	context.hpp	/^  bool run;$/;"	m	struct:Flags	access:public
-run	context.hpp	/^  bool run;$/;"	m	struct:__anon1	access:public
+positionsoffset	context.hpp	/^    GLuint positionsoffset, colorsoffset, normalsoffset;$/;"	m	struct:GL	access:public
+program	context.hpp	/^    GLuint program;$/;"	m	struct:GL	access:public
+programObject	context.hpp	/^    GLuint programObject;$/;"	m	struct:__anon1	access:public
+render_text	renderUtils.cpp	/^void render_text(CONTEXT_TYPE *context, const char *text, float x, float y, float sx, float sy) {$/;"	f	signature:(CONTEXT_TYPE *context, const char *text, float x, float y, float sx, float sy)
+render_text	renderUtils.hpp	/^void render_text(CONTEXT_TYPE*,const char*, float, float, float, float);$/;"	p	signature:(CONTEXT_TYPE*,const char*, float, float, float, float)
+run	context.hpp	/^    bool run;$/;"	m	struct:Flags	access:public
+run	context.hpp	/^    bool run;$/;"	m	struct:__anon1	access:public
 run	test.cpp	/^  int run;$/;"	m	struct:__anon1	file:	access:public
 run	test3.cpp	/^  int run;$/;"	m	struct:__anon4	file:	access:public
-saved_crtc	context.hpp	/^	drmModeCrtc *saved_crtc;$/;"	m	struct:Drm	access:public
-surface	context.hpp	/^	EGLSurface surface;$/;"	m	struct:GL	access:public
-surface	context.hpp	/^	struct gbm_surface *surface;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_surface	access:public
+saved_crtc	context.hpp	/^    drmModeCrtc *saved_crtc;$/;"	m	struct:Drm	access:public
+surface	context.hpp	/^    EGLSurface surface;$/;"	m	struct:GL	access:public
+surface	context.hpp	/^    struct gbm_surface *surface;$/;"	m	struct:Gbm	typeref:struct:Gbm::gbm_surface	access:public
 t1	test.cpp	/^void t1() {$/;"	f	signature:()
 t2	test.cpp	/^void t2() {$/;"	f	signature:()
 tempAngle	gl.cpp	/^float tempAngle = 0.0;$/;"	v
-uniform_color	context.hpp	/^  GLint uniform_color;$/;"	m	struct:Uniforms	access:public
-uniform_istext	context.hpp	/^  GLint uniform_istext;$/;"	m	struct:Uniforms	access:public
-uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:Context	access:public
-uniforms	context.hpp	/^  Uniforms uniforms;$/;"	m	struct:__anon1	access:public
+uniform_color	context.hpp	/^    GLint uniform_color;$/;"	m	struct:Uniforms	access:public
+uniform_istext	context.hpp	/^    GLint uniform_istext;$/;"	m	struct:Uniforms	access:public
+uniforms	context.hpp	/^    Uniforms uniforms;$/;"	m	struct:Context	access:public
+uniforms	context.hpp	/^    Uniforms uniforms;$/;"	m	struct:__anon1	access:public
 updateFunc	esUtil.h	/^   void (ESCALLBACK *updateFunc) ( struct _escontext *, float deltaTime );$/;"	m	struct:_escontext	access:public
-userData	esUtil.h	/^   UserData       userData;$/;"	m	struct:_escontext	access:public
+userData	esUtil.h	/^   void*       userData;$/;"	m	struct:_escontext	access:public
 userInterrupt	esUtil.cpp	/^GLboolean userInterrupt(ESContext *esContext)$/;"	f	signature:(ESContext *esContext)
-vbo	context.hpp	/^	GLuint vbo[2];$/;"	m	struct:GL	access:public
-vbo	context.hpp	/^  GLuint vbo[2];$/;"	m	struct:__anon1	access:public
+vbo	context.hpp	/^    GLuint vbo[2];$/;"	m	struct:GL	access:public
+vbo	context.hpp	/^    GLuint vbo[2];$/;"	m	struct:__anon1	access:public
 wCustom	gl.cpp	/^float xCustom = -1.0, yCustom = 1.0, zCustom = 0.0, wCustom = 0.0;$/;"	v
 weight	skeleton.hpp	/^    GLint weight;  $/;"	m	class:bone	access:public
 weight	test2.cpp	/^    GLint weight;  $/;"	m	class:bone	file:	access:public

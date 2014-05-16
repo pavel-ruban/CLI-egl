@@ -1,27 +1,50 @@
-OBJECTS = main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o
+CC := g++
+CFLAGS := -std=c++11 -g -c -O0 -Wall -I/usr/include/freetype2
+CCFLAGS := $(shell pkg-config --cflags --libs freetype2) -lm -lGLESv2 -lEGL -lpcre -lboost_system -lboost_thread
 
-all: $(OBJECTS)
-	g++ -std=c++11 -o egl main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o `pkg-config --cflags --libs x11 freetype2` -lGLESv2 -lEGL -lpcre -lboost_system -lboost_thread
-	#g++ -o egl egl.o utils.o input.o `pkg-config --cflags --libs glesv2 egl x11` -lpcre -lboost_system -lboost_thread
-	#rm egl.o utils.o input.o
+
+# Use DRM platform by default
+ifndef X11_FLAG
+
+DEPENDIES := main.o gl.o drm.o input.o render.o renderUtils.o skeleton.o utils.o
+DRM := $(shell pkg-config --cflags --libs libdrm) -lgbm
+CFLAGS += $(DRM)
+CCFLAGS += $(DRM)
+OBJECTS := main.o drm.o gl.o utils.o input.o render.o renderUtils.o skeleton.o
+
+# Otherwise X11
+else
+
+DEPENDIES := main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o 
+OBJECTS := main.o gl.o utils.o input.o render.o renderUtils.o skeleton.o
+CCFLAGS += $(shell pkg-conig --libs x11)
+
+endif
+
+# Default recipe.
+all: $(DEPENDIES)
+	$(CC) -o egl $(OBJECTS) $(CCFLAGS)
 
 main.o : main.cpp common.hpp context.hpp gl.hpp render.hpp input.h
-	g++ -std=c++11 main.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) main.cpp
 
 gl.o : gl.cpp esUtil.h context.hpp common.hpp input.h
-	g++ -std=c++11 gl.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) gl.cpp
 
 render.o : render.cpp esUtil.h context.hpp common.hpp
-	g++ -std=c++11 render.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) render.cpp
 
 renderUtils.o : renderUtils.cpp esUtil.h context.hpp
-	g++ -std=c++11 renderUtils.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) renderUtils.cpp
 
 skeleton.o : skeleton.cpp common.hpp skeleton.hpp
-	g++ -std=c++11 skeleton.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) skeleton.cpp
 
 input.o : input.cpp input.h
-	g++ input.cpp -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) input.cpp
 
 utils.o : esUtil.cpp esUtil.h
-	g++ esUtil.cpp -o utils.o -I/usr/include/freetype2 -Wall -O0 -g -c
+	$(CC) $(CFLAGS) esUtil.cpp -o utils.o
+
+drm.o : drm.cpp drm.hpp
+	$(CC) $(CFLAGS) drm.cpp

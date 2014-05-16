@@ -68,7 +68,7 @@ typedef struct
 typedef struct _escontext
 {
    /// Put your user data here...
-   UserData       userData;
+   void*       userData;
 
    /// Window width
    GLint       width;

@@ -13,37 +13,38 @@
 /**
  * Init graphic & start render process.
  */
-void graphic_thread(CONTEXT_TYPE context) {
+void graphic_thread(CONTEXT_TYPE *context) {
   #ifdef _egl_use_drm
-    ret = init_drm(context);
+	  int ret;
 
-    if (ret) {
+    if (ret = init_drm(context)) {
       printf("failed to initialize DRM\n");
-      return ret;
+      return;
     }
 
-    ret = init_gbm(context);
-    if (ret) {
+    if (ret = init_gbm(context)) {
       printf("failed to initialize GBM\n");
-      return ret;
+      return;
     }
 
-    ret = init_gl(context);
-    if (ret) {
+    if (ret = init_gl(context)) {
       printf("failed to initialize EGL\n");
-      return ret;
+      return;
     }
 
     GL* gl = &context->gl;
     Gbm* gbm = &context->gbm;
     Drm* drm = &context->drm;
 
+    struct gbm_bo *bo;
+    struct drm_fb *fb;
+
     /* clear the color buffer */
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     eglSwapBuffers(gl->display, gl->surface);
     bo = gbm_surface_lock_front_buffer(gbm->surface);
-    fb = drm_fb_get_from_bo(bo);
+    fb = drm_fb_get_from_bo(bo, context);
 
     /* set mode: */
     ret = drmModeSetCrtc(drm->fd, drm->crtc_id, fb->fb_id, 0, 0,
@@ -51,15 +52,13 @@ void graphic_thread(CONTEXT_TYPE context) {
 
     if (ret) {
       printf("failed to set mode: %s\n", strerror(errno));
-      return ret;
+      return;
     }
 
 	  fd_set fds;
     drmEventContext e;
     e.version = DRM_EVENT_CONTEXT_VERSION;
     e.page_flip_handler = page_flip_handler;
-    struct gbm_bo *bo;
-    struct drm_fb *fb;
 
     while (context->flags.run) {
       struct gbm_bo *next_bo;
@@ -79,7 +78,7 @@ void graphic_thread(CONTEXT_TYPE context) {
           DRM_MODE_PAGE_FLIP_EVENT, &waiting_for_flip);
       if (ret) {
         printf("failed to queue page flip: %s\n", strerror(errno));
-        return -1;
+        return;
       }
 
       while (waiting_for_flip && context->flags.run) {
@@ -90,7 +89,7 @@ void graphic_thread(CONTEXT_TYPE context) {
 
         if (ret < 0) {
           printf("select err: %s\n", strerror(errno));
-          return ret;
+          return;
         } else if (FD_ISSET(drm->fd, &fds)) {
           drmHandleEvent(drm->fd, &e);
         }
@@ -102,7 +101,7 @@ void graphic_thread(CONTEXT_TYPE context) {
     }
 
     // Release drm resources.
-    modeset_cleanup(drm->fd);
+    modeset_cleanup(drm->fd, context);
   #elif defined _egl_use_x11
     esCreateWindow(context, "OpenGLEv2", 1080, 1080, ES_WINDOW_RGB);
 
@@ -118,7 +117,7 @@ void graphic_thread(CONTEXT_TYPE context) {
 /**
  * Handle input handlers.
  */
-void event_thread(CONTEXT_TYPE context) {
+void event_thread(CONTEXT_TYPE *context) {
   int retval, max_fd;
   fd_set input;
   inputFds inputFds = initInput(); 
@@ -133,7 +132,7 @@ void event_thread(CONTEXT_TYPE context) {
   printf("mouse fd = %i\nkeyboard fd = %i", inputFds.mouse, inputFds.kbd);
 
   // Check context flag to break cycle.
-  while (context->userData.run) {
+  while (context->flags.run) {
     /* Initialize the input set */
     FD_ZERO(&input);
     FD_SET(inputFds.mouse, &input);

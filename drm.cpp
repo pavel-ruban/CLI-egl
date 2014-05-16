@@ -4,7 +4,9 @@
 
 #include "context.hpp"
 
-static int init_drm(Context* context) {
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+
+int init_drm(Context* context) {
   Drm* drm = &context->drm;
   static const char *modules[] = {
     "i915", "radeon", "nouveau", "nvidia", "vmwgfx", "omapdrm", "exynos", "msm"
@@ -92,11 +94,11 @@ static int init_drm(Context* context) {
 	return 0;
 }
 
-static int init_gbm(Context* context) {
+int init_gbm(Context* context) {
   Gbm* gbm = &context->gbm;
   Drm* drm = &context->drm;
 
-  gbm->dev = gbm_create_device(drm.fd);
+  gbm->dev = gbm_create_device(drm->fd);
 
 	gbm->surface = gbm_surface_create(gbm->dev,
 			drm->mode->hdisplay, drm->mode->vdisplay,
@@ -111,11 +113,12 @@ static int init_gbm(Context* context) {
 	return 0;
 }
 
-static int init_gl(Context* context) {
+int init_gl(Context* context) {
   GL* gl = &context->gl;
   Gbm* gbm = &context->gbm;
   Drm* drm = &context->drm;
 
+	EGLint major, minor, n;
 	GLint ret;
 
 	static const EGLint context_attribs[] = {
@@ -133,7 +136,7 @@ static int init_gl(Context* context) {
 		EGL_NONE
 	};
 
-	gl->display = eglGetDisplay(gbm->dev);
+	gl->display = eglGetDisplay((EGLNativeDisplayType) gbm->dev);
 
 	if (!eglInitialize(gl->display, &major, &minor)) {
 		printf("failed to initialize\n");
@@ -164,7 +167,7 @@ static int init_gl(Context* context) {
 		return -1;
 	}
 
-	gl->surface = eglCreateWindowSurface(gl->display, gl->config, gbm->surface, NULL);
+	gl->surface = eglCreateWindowSurface(gl->display, gl->config, (EGLNativeWindowType) gbm->surface, NULL);
 	if (gl->surface == EGL_NO_SURFACE) {
 		printf("failed to create egl surface\n");
 		return -1;
@@ -178,19 +181,22 @@ static int init_gl(Context* context) {
 	return 0;
 }
 
-static void drm_fb_destroy_callback(struct gbm_bo *bo, void *data) {
-	struct drm_fb *fb = (drm_fb*) data;
+void drm_fb_destroy_callback(struct gbm_bo *bo, void *data) {
+  CONTEXT_TYPE *context = (CONTEXT_TYPE*) data;
+	struct drm_fb *fb = context->drm.fb;
 	struct gbm_device *gbm = gbm_bo_get_device(bo);
+  Drm *drm = &context->drm;
 
 	if (fb->fb_id)
-		drmModeRmFB(drm.fd, fb->fb_id);
+		drmModeRmFB(drm->fd, fb->fb_id);
 
 	free(fb);
 }
 
-static struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo) {
+struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo, CONTEXT_TYPE *context) {
 	struct drm_fb *fb = (drm_fb*) gbm_bo_get_user_data(bo);
 	uint32_t width, height, stride, handle;
+  Drm* drm = &context->drm;
 	int ret;
 
 	if (fb)
@@ -204,25 +210,26 @@ static struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo) {
 	stride = gbm_bo_get_stride(bo);
 	handle = gbm_bo_get_handle(bo).u32;
 
-	ret = drmModeAddFB(drm.fd, width, height, 24, 32, stride, handle, &fb->fb_id);
+	ret = drmModeAddFB(drm->fd, width, height, 24, 32, stride, handle, &fb->fb_id);
 	if (ret) {
 		printf("failed to create fb: %s\n", strerror(errno));
 		free(fb);
 		return NULL;
 	}
 
-	gbm_bo_set_user_data(bo, fb, drm_fb_destroy_callback);
+  context->drm.fb = fb;
+	gbm_bo_set_user_data(bo, context, drm_fb_destroy_callback);
 
 	return fb;
 }
 
-static void page_flip_handler(int fd, unsigned int frame,
+void page_flip_handler(int fd, unsigned int frame,
 		  unsigned int sec, unsigned int usec, void *data) {
 	int *waiting_for_flip = (int*) data;
 	*waiting_for_flip = 0;
 }
 
-static void modeset_cleanup(int fd, Context* context) {
+void modeset_cleanup(int fd, Context* context) {
   Drm* drm = &context->drm;
   /* restore saved CRTC configuration */
   drmModeSetCrtc(fd,
