@@ -3,6 +3,7 @@
  */
 
 #include "context.hpp"
+#include "gl.hpp"
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
@@ -178,6 +179,8 @@ int init_gl(Context* context) {
 
 	glViewport(0, 0, drm->mode->hdisplay, drm->mode->vdisplay);
 
+  Init(context);
+
 	return 0;
 }
 
@@ -217,8 +220,8 @@ struct drm_fb* drm_fb_get_from_bo(struct gbm_bo *bo, CONTEXT_TYPE *context) {
 		return NULL;
 	}
 
-  context->drm.fb = fb;
-	gbm_bo_set_user_data(bo, context, drm_fb_destroy_callback);
+  drm->fb = fb;
+	gbm_bo_set_user_data(bo, fb, drm_fb_destroy_callback);
 
 	return fb;
 }

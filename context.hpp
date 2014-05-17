@@ -25,6 +25,16 @@
     bool debug;
   };
 
+  struct Vars {
+    GLfloat mAngle;
+    GLfloat mAngleSin;
+    GLfloat mAngleCos;
+    GLfloat mouseX;
+    GLfloat mouseY;
+    bool aid;
+    bool pressed;
+  };
+
   #ifdef _egl_use_drm
 
   struct GL {
@@ -64,6 +74,7 @@
     Flags flags;
     Freetype freetype;
     Uniforms uniforms;
+    Vars vars;
   };
 
   #elif defined _egl_use_x11

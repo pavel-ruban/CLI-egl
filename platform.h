@@ -15,6 +15,21 @@
     #include <xf86drmMode.h>
     #include <gbm.h>
     #include <errno.h>
+    #include <linux/input.h>
+    #include <time.h>
+    #include <unistd.h>
+    #include <sys/select.h>
+    #include <sys/mman.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <fstream>
+    #include <vector>
+    #include <array>
+    #include <string>
+    #include <math.h>
 
   #elif defined _egl_use_x11
     #define CONTEXT_TYPE ESContext

@@ -6,11 +6,11 @@ CCFLAGS := $(shell pkg-config --cflags --libs freetype2) -lm -lGLESv2 -lEGL -lpc
 # Use DRM platform by default
 ifndef X11_FLAG
 
-DEPENDIES := main.o gl.o drm.o input.o render.o renderUtils.o skeleton.o utils.o
+DEPENDIES := main.o gl.o drm.o input.o render.o renderUtils.o skeleton.o utils.o interface.o
 DRM := $(shell pkg-config --cflags --libs libdrm) -lgbm
 CFLAGS += $(DRM)
 CCFLAGS += $(DRM)
-OBJECTS := main.o drm.o gl.o utils.o input.o render.o renderUtils.o skeleton.o
+OBJECTS := main.o drm.o gl.o utils.o input.o render.o renderUtils.o skeleton.o interface.o
 
 # Otherwise X11
 else
@@ -25,26 +25,29 @@ endif
 all: $(DEPENDIES)
 	$(CC) -o egl $(OBJECTS) $(CCFLAGS)
 
-main.o : main.cpp common.hpp context.hpp gl.hpp render.hpp input.h
+main.o : main.cpp common.hpp context.hpp gl.hpp render.hpp input.h platform.h
 	$(CC) $(CFLAGS) main.cpp
 
-gl.o : gl.cpp esUtil.h context.hpp common.hpp input.h
+gl.o : gl.cpp esUtil.h context.hpp common.hpp input.h platform.h context.hpp
 	$(CC) $(CFLAGS) gl.cpp
 
-render.o : render.cpp esUtil.h context.hpp common.hpp
+render.o : render.cpp esUtil.h context.hpp common.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) render.cpp
 
-renderUtils.o : renderUtils.cpp esUtil.h context.hpp
+renderUtils.o : renderUtils.cpp esUtil.h context.hpp platform.h
 	$(CC) $(CFLAGS) renderUtils.cpp
 
-skeleton.o : skeleton.cpp common.hpp skeleton.hpp
+interface.o : interface.cpp interface.hpp platform.h context.hpp
+	$(CC) $(CFLAGS) interface.cpp
+
+skeleton.o : skeleton.cpp common.hpp skeleton.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) skeleton.cpp
 
-input.o : input.cpp input.h
+input.o : input.cpp input.h platform.h context.hpp
 	$(CC) $(CFLAGS) input.cpp
 
-utils.o : esUtil.cpp esUtil.h
+utils.o : esUtil.cpp esUtil.h platform.h context.hpp
 	$(CC) $(CFLAGS) esUtil.cpp -o utils.o
 
-drm.o : drm.cpp drm.hpp
+drm.o : drm.cpp drm.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) drm.cpp

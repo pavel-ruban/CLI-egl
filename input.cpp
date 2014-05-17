@@ -306,6 +306,15 @@ void handleEvent(int fd, CONTEXT_TYPE *context) {
           }
           break;
 
+        case 272:
+          if (ev.value == 1) {
+            context->vars.pressed = true;
+          }
+          else if (ev.value == 0) {
+            context->vars.pressed = false;
+          }
+          break;
+
 
       }
       break;
@@ -313,11 +322,19 @@ void handleEvent(int fd, CONTEXT_TYPE *context) {
     case 2:
       switch (ev.code) {
         case 0:
-          xCustom += 0.01 * -1 * ev.value;
+          context->vars.mouseX += 0.001 * ev.value;
+          if (context->vars.mouseX > 1.0)
+            context->vars.mouseX = 1.0;
+          if (context->vars.mouseX < -1.0)
+            context->vars.mouseX = -1.0;
           break;
 
         case 1:
-          yCustom += 0.01 * -1 * ev.value;
+          context->vars.mouseY += 0.001 * -1 * ev.value;
+          if (context->vars.mouseY > 1.0)
+            context->vars.mouseY = 1.0;
+          if (context->vars.mouseY < -1.0)
+            context->vars.mouseY = -1.0;
           break;
       }
       break;

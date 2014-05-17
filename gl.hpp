@@ -1,4 +1,4 @@
-#include "esUtil.h"
+#include "context.hpp"
 
 GLuint LoadShader(GLenum, const char *);
-int Init(ESContext *esContext);
+int Init(CONTEXT_TYPE*);
