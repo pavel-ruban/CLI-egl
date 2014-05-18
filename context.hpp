@@ -18,6 +18,7 @@
   struct Uniforms {
     GLint uniform_istext;
     GLint uniform_color;
+    GLint uniform_blending;
   };
 
   struct Flags {
@@ -29,6 +30,8 @@
     GLfloat mAngle;
     GLfloat mAngleSin;
     GLfloat mAngleCos;
+    GLfloat mouseClickedX;
+    GLfloat mouseClickedY;
     GLfloat mouseX;
     GLfloat mouseY;
     bool aid;

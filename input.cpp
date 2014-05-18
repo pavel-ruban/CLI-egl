@@ -309,6 +309,9 @@ void handleEvent(int fd, CONTEXT_TYPE *context) {
         case 272:
           if (ev.value == 1) {
             context->vars.pressed = true;
+
+            context->vars.mouseClickedX = context->vars.mouseX;
+            context->vars.mouseClickedY = context->vars.mouseY;
           }
           else if (ev.value == 0) {
             context->vars.pressed = false;

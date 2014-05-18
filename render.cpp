@@ -196,15 +196,40 @@ void Draw(CONTEXT_TYPE *context) {
       glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
   }
 
-    vertices = {
-      vars.mouseX, vars.mouseY, 0.0, 1.0,
-      vars.mouseX + 0.021, vars.mouseY - 0.03, 0.0, 1.0,
-      vars.mouseX + 0.007, vars.mouseY - 0.05, 0.0, 1.0,
-      0.0, 1.0, 0.0, 1.0,
-    };
+  vertices = {
+    vars.mouseX, vars.mouseY, 0.0, 1.0,
+    vars.mouseX + 0.021, vars.mouseY - 0.03, 0.0, 1.0,
+    vars.mouseX + 0.007, vars.mouseY - 0.05, 0.0, 1.0,
+    0.0, 1.0, 0.0, 1.0,
+  };
 
   glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, (void*) vertices.data(), GL_DYNAMIC_DRAW);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+
+  if (vars.pressed) {
+    vertices = {
+      vars.mouseClickedX, vars.mouseClickedY, 0.0, 1.0,
+      vars.mouseX, vars.mouseClickedY, 0.0, 1.0,
+      vars.mouseX, vars.mouseY, 0.0, 1.0,
+      vars.mouseClickedX, vars.mouseY, 0.0, 1.0,
+    };
+
+    glUniform4f(context->uniforms.uniform_color, 0.0, 1.0, 0.0, 1.0);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, (void*) vertices.data(), GL_DYNAMIC_DRAW);
+    glDrawArrays(GL_LINE_LOOP, 0, 4);
+    vertices = {
+      vars.mouseClickedX, vars.mouseClickedY, 0.0, 1.0,
+      vars.mouseX, vars.mouseClickedY, 0.0, 1.0,
+      vars.mouseClickedX, vars.mouseY, 0.0, 1.0,
+      vars.mouseX, vars.mouseY, 0.0, 1.0,
+    };
+    glUniform2f(context->uniforms.uniform_blending, 1.0, 0.15);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, (void*) vertices.data(), GL_DYNAMIC_DRAW);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glUniform2f(context->uniforms.uniform_blending, 0.0, 0.05);
+    glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
+  }
+
 
   static int ii = 0;
   float sx = 2.0 / drm.mode->hdisplay;

@@ -203,6 +203,9 @@ int Init(CONTEXT_TYPE *context) {
   if ((location = glGetUniformLocation(programObject, "color")) != -1)
     context->uniforms.uniform_color = location;
     
+  if ((location = glGetUniformLocation(programObject, "blending")) != -1)
+    context->uniforms.uniform_blending = location;
+    
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
    
