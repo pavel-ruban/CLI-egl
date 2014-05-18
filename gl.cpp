@@ -17,7 +17,6 @@
 
 #include "esUtil.h"
 #include "context.hpp"
-#include "common.hpp"
 #include <streambuf>
 #include <iostream>
 

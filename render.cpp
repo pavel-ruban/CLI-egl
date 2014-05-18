@@ -1,8 +1,9 @@
 #include "esUtil.h"
-#include "common.hpp"
 #include "context.hpp"
 #include "renderUtils.hpp"
 #include "interface.hpp"
+
+using namespace std;
 
 /*
  * Draw a triangle using the shader pair created in Init()
@@ -64,30 +65,44 @@ void Draw(CONTEXT_TYPE *context) {
 //    i++;
 //  } 
 
-//  mAngle = xAngle;
-//
-//  if (tempAngle == 0.0 || tempAngle != mAngle) {
-//    mAngleSin = sin(mAngle * PI / 180);
-//    mAngleCos = cos(mAngle * PI / 180);
-//    tempAngle = mAngle;
-//  }
-//
-//  GLfloat mRotate[] {
-//    mAngleCos, -mAngleSin,  0.0, 0.0,
-//   mAngleSin,  mAngleCos,  0.0, 0.0,
-//    0.0,        0.0,        1.0, 0.0,
-//    0.0,        0.0,        0.0, 1.0,
-//  };
+  float mAngle = context->vars.mAngle;
+  static float tempAngle = 0.0;
+  static float mAngleCos = 0.0;
+  static float mAngleSin = 0.0;
+  static float scale = 1080.00 / 1920.00 ;//drm.mode->vdisplay / drm.mode->hdisplay;
   
-  float scale = 0.7;//drm.mode->vdisplay / drm.mode->hdisplay;
+  if (mAngle > 360.00) {
+    mAngle = context->vars.mAngle = 0.0;
+  }
+
+  if (tempAngle == 0.0 || tempAngle != mAngle) {
+    mAngleSin = sin(mAngle * PI / 180);
+    mAngleCos = cos(mAngle * PI / 180);
+    tempAngle = mAngle;
+  }
+
+  static float scale2 = 1920.00 / 1080.00;//drm.mode->vdisplay / drm.mode->hdisplay;
+
+  GLfloat mRotate[] {
+    mAngleCos, -mAngleSin,  0.0, 0.0,
+   mAngleSin,  mAngleCos,  0.0, 0.0,
+    0.0,        0.0,        1.0, 0.0,
+    0.0,        0.0,        0.0, 1.0,
+  };
+  
   GLfloat vVertices[] = {
-    -0.25 * scale, -0.25, 0.0, 1.0,
-    0.25 * scale, -0.25, 0.0, 1.0,
-    -0.25 * scale, 0.25, 0.0, 1.0,
-    0.25 * scale, 0.25, 0.0, 1.0,
+    -0.25, 0.25, 0.0, 1.0,
+    0.25, 0.25, 0.0, 1.0,
+    -0.25, -0.25, 0.0, 1.0,
+    0.25, -0.25, 0.0, 1.0,
   };
 
-  //multipleMatrices4x4(vVertices, mRotate);
+  multipleMatrices4x4(vVertices, mRotate);
+
+  vVertices[0] *= scale;
+  vVertices[4] *= scale;
+  vVertices[8] *= scale;
+  vVertices[12] *= scale;
 
   GLfloat texCoords[4][2] = {
     {0, 0},
@@ -96,7 +111,11 @@ void Draw(CONTEXT_TYPE *context) {
     {1, 1},
   };
 
-  glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
+  if (context->vars.mAngleAuto) {
+    context->vars.mAngle += 1.0;
+  }
+
+  glUniform4f(context->uniforms.uniform_color, 0.0, 0.0, 1.0, 1.0);
 
   glBindBuffer(GL_ARRAY_BUFFER, context->gl.vbo[1]);
   glBufferData(GL_ARRAY_BUFFER, sizeof texCoords, texCoords, GL_DYNAMIC_DRAW);
@@ -104,81 +123,101 @@ void Draw(CONTEXT_TYPE *context) {
   glBufferData(GL_ARRAY_BUFFER, sizeof vVertices, vVertices, GL_DYNAMIC_DRAW);
 
   glUniform1i(context->uniforms.uniform_istext, 0);
-  //glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
+  glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
   Vars vars = context->vars;
 
-  vVertices[0] = 0.8;
-  vVertices[1] = 0.0;
-  vVertices[2] = 0.0;
-  vVertices[3] = 1.0;
+  array<GLfloat, 16> vertices;
 
-  vVertices[4] = 0.8;
-  vVertices[5] = 0.1;
-  vVertices[6] = 0.0;
-  vVertices[7] = 1.0;
-
-  vVertices[8] = 1.0;
-  vVertices[9] = 0.0;
-  vVertices[10] = 0.0;
-  vVertices[11] = 1.0;
-
-  vVertices[12] = 1.0;
-  vVertices[13] = 0.1;
-  vVertices[14] = 0.0;
-  vVertices[15] = 1.0;
-
-  if (vars.mouseX >= 0.8 && vars.mouseX <= 1.0 && vars.mouseY >= 0.0 && vars.mouseY <= 0.1)
-    vars.aid = true;
 
   float stride = 0.0;
-  for (int i = 0; i < 3; i++) {
-    button btn;
+  float btn_width = 0.15;
+  float btn_height = 0.05;
+  float gasp = 0.015;
+  static float offsetY = 1.0, offsetX = 1.0;
+  static int counter = 0;
 
-
+  for (int i = 0; i < 13; i++) {
+    void (*handler) (CONTEXT_TYPE*);
     
-  }
-  if (vars.aid) {
-    if (vars.pressed) {
-      glUniform4f(context->uniforms.uniform_color, 0.0, 1.0, 0.0, 1.0);
+    switch (i) {
+      case 1:
+        handler = decrement;
+        break;
+
+      case 2:
+        handler = incrementAngle;
+        break;
+
+      case 3:
+        handler = decrementAngle;
+        break;
+
+      case 4:
+        handler = toggleAngle;
+        break;
+
+      default:
+        handler = increment;
+        break;
+      
     }
-    else {
-      glUniform4f(context->uniforms.uniform_color, 0.4, 0.4, 0.4, 1.0);
+
+    button btn(offsetX - gasp - btn_width, offsetY - gasp - btn_height - stride, handler);
+
+    stride += gasp + btn.height;
+
+    vertices = {
+      btn.x, btn.y, 0.0, 1.0,
+      btn.x, btn.y + btn.height, 0.0, 1.0,
+      btn.x + btn.width, btn.y, 0.0, 1.0,
+      btn.x + btn.width, btn.y + btn.height, 0.0, 1.0,
+    };
+
+    if (vars.mouseX >= btn.x && vars.mouseX <= btn.x + btn.width && vars.mouseY >= btn.y && vars.mouseY <= btn.y + btn.height)
+      btn.hover = true;
+
+    if (btn.hover) {
+      if (vars.pressed) {
+          btn.trigger("submit", context);
+
+        glUniform4f(context->uniforms.uniform_color, 0.0, 1.0, 0.0, 1.0);
+      }
+      else {
+        glUniform4f(context->uniforms.uniform_color, 0.4, 0.4, 0.4, 1.0);
+      }
     }
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, (void*) vertices.data(), GL_DYNAMIC_DRAW);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    
+    if (btn.hover)
+      glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
   }
 
-  glBufferData(GL_ARRAY_BUFFER, sizeof vVertices, vVertices, GL_DYNAMIC_DRAW);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    vertices = {
+      vars.mouseX, vars.mouseY, 0.0, 1.0,
+      vars.mouseX + 0.021, vars.mouseY - 0.03, 0.0, 1.0,
+      vars.mouseX + 0.007, vars.mouseY - 0.05, 0.0, 1.0,
+      0.0, 1.0, 0.0, 1.0,
+    };
 
-  if (vars.aid)
-    glUniform4f(context->uniforms.uniform_color, 1.0, 1.0, 1.0, 1.0);
-
-  vVertices[0] = vars.mouseX;
-  vVertices[1] = vars.mouseY;
-  vVertices[2] = 0.0;
-  vVertices[3] = 1.0;
-  vVertices[4] = vars.mouseX + 0.021;
-  vVertices[5] = vars.mouseY - 0.03;
-  vVertices[6] = 0.0;
-  vVertices[7] = 1.0;
-  vVertices[8] = vars.mouseX + 0.007;
-  vVertices[9] = vars.mouseY - 0.05;
-  vVertices[10] = 0.0;
-  vVertices[11] = 1.0;
-
-  glBufferData(GL_ARRAY_BUFFER, sizeof vVertices, vVertices, GL_DYNAMIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, (void*) vertices.data(), GL_DYNAMIC_DRAW);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
 
   static int ii = 0;
+  float sx = 2.0 / drm.mode->hdisplay;
+  float sy = 2.0 / drm.mode->vdisplay;
+  static char buff[1000], message[100];
+  glUniform1i(context->uniforms.uniform_istext, 1);
   if (context->flags.debug) {
-    float sx = 2.0 / drm.mode->hdisplay;
-    float sy = 2.0 / drm.mode->vdisplay;
 
+    FT_Set_Pixel_Sizes(context->freetype.face, 0, 18);
     glUniform1i(context->uniforms.uniform_istext, 1);
 
     float rx = 0.0, ry = 0.0;
     int offset = 0;
-    char buff[100], message[100];
 
     stride = -0.1;
 
@@ -263,6 +302,11 @@ void Draw(CONTEXT_TYPE *context) {
     sprintf(buff, "scale: %f", scale);
     render_text(context, buff, -1 + 8 * sx, 1 - stride - 50 * sy,    sx, sy);
   }
+
+  FT_Set_Pixel_Sizes(context->freetype.face, 0, 458);
+  stride = 0.2;
+  sprintf(buff, " %i", vars.counter);
+  render_text(context, buff, -1 + 8 * sx + 0.9, 1 - stride - 0.4 - 50 * sy,    sx, sy);
 
   ii++;
 }

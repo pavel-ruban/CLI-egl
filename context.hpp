@@ -33,6 +33,8 @@
     GLfloat mouseY;
     bool aid;
     bool pressed;
+    bool mAngleAuto;
+    int counter;
   };
 
   #ifdef _egl_use_drm

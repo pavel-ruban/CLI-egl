@@ -1,4 +1,3 @@
-#include "common.hpp"
 #include "context.hpp"
 #include "gl.hpp"
 #include "render.hpp"
@@ -46,14 +45,17 @@ void graphic_thread(CONTEXT_TYPE *context) {
     bo = gbm_surface_lock_front_buffer(gbm->surface);
     fb = drm_fb_get_from_bo(bo, context);
 
-    /* set mode: */
-    ret = drmModeSetCrtc(drm->fd, drm->crtc_id, fb->fb_id, 0, 0,
-        &drm->connector_id, 1, drm->mode);
+    #ifndef _egl_display_none
+      /* set mode: */
+      ret = drmModeSetCrtc(drm->fd, drm->crtc_id, fb->fb_id, 0, 0,
+          &drm->connector_id, 1, drm->mode);
 
     if (ret) {
       printf("failed to set mode: %s\n", strerror(errno));
       return;
     }
+
+    #endif
 
 	  fd_set fds;
     drmEventContext e;
@@ -70,16 +72,20 @@ void graphic_thread(CONTEXT_TYPE *context) {
       next_bo = gbm_surface_lock_front_buffer(gbm->surface);
       fb = drm_fb_get_from_bo(next_bo, context);
 
-      /*
-       * Here you could also update drm plane layers if you want
-       * hw composition
-       */
-      ret = drmModePageFlip(drm->fd, drm->crtc_id, fb->fb_id,
-          DRM_MODE_PAGE_FLIP_EVENT, &waiting_for_flip);
-      if (ret) {
-        printf("failed to queue page flip: %s\n", strerror(errno));
-        return;
-      }
+      #ifndef _egl_display_none
+        /*
+         * Here you could also update drm plane layers if you want
+         * hw composition
+         */
+        ret = drmModePageFlip(drm->fd, drm->crtc_id, fb->fb_id,
+            DRM_MODE_PAGE_FLIP_EVENT, &waiting_for_flip);
+        if (ret) {
+          printf("failed to queue page flip: %s\n", strerror(errno));
+          return;
+        }
+      #else
+        waiting_for_flip = 0;
+      #endif
 
       while (waiting_for_flip && context->flags.run) {
         FD_ZERO(&fds);

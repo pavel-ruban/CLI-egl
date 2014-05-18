@@ -11,6 +11,7 @@ DRM := $(shell pkg-config --cflags --libs libdrm) -lgbm
 CFLAGS += $(DRM)
 CCFLAGS += $(DRM)
 OBJECTS := main.o drm.o gl.o utils.o input.o render.o renderUtils.o skeleton.o interface.o
+DISPLAY_NONE := -D _egl_display_none
 
 # Otherwise X11
 else
@@ -25,13 +26,24 @@ endif
 all: $(DEPENDIES)
 	$(CC) -o egl $(OBJECTS) $(CCFLAGS)
 
-main.o : main.cpp common.hpp context.hpp gl.hpp render.hpp input.h platform.h
+blank-screen: main-blank.o gl.o drm.o input.o render.o renderUtils.o skeleton.o utils.o interface.o
+	$(CC) -o egl main-blank.o gl.o drm.o input.o render.o renderUtils.o skeleton.o utils.o interface.o $(CCFLAGS)
+
+clean:
+	@echo "Cleaning all objec files..."
+	-rm main.o main-blank.o
+
+main.o : main.cpp context.hpp gl.hpp render.hpp input.h platform.h
 	$(CC) $(CFLAGS) main.cpp
 
-gl.o : gl.cpp esUtil.h context.hpp common.hpp input.h platform.h context.hpp
+main-blank.o : main.cpp context.hpp gl.hpp render.hpp input.h platform.h
+	@echo "Disabling render output for debug purposes..."
+	$(CC) $(CFLAGS) $(DISPLAY_NONE) -o main-blank.o main.cpp
+
+gl.o : gl.cpp esUtil.h context.hpp input.h platform.h context.hpp
 	$(CC) $(CFLAGS) gl.cpp
 
-render.o : render.cpp esUtil.h context.hpp common.hpp platform.h context.hpp
+render.o : render.cpp esUtil.h context.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) render.cpp
 
 renderUtils.o : renderUtils.cpp esUtil.h context.hpp platform.h
@@ -40,7 +52,7 @@ renderUtils.o : renderUtils.cpp esUtil.h context.hpp platform.h
 interface.o : interface.cpp interface.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) interface.cpp
 
-skeleton.o : skeleton.cpp common.hpp skeleton.hpp platform.h context.hpp
+skeleton.o : skeleton.cpp skeleton.hpp platform.h context.hpp
 	$(CC) $(CFLAGS) skeleton.cpp
 
 input.o : input.cpp input.h platform.h context.hpp

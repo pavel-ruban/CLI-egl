@@ -1,9 +1,10 @@
+#include "context.hpp"
+
 /**
  * Current header provider skeleton structure declarations
  * in order to make an animation skeleton.
  */
 
-#include "common.hpp"
 
 class bone {
   public:
